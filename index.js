@@ -1,3 +1,27 @@
+// "use strict"
+
+
+// let search = document.getElementById('searchForm')
+// search.addEventListener('submit', (evt)=>{
+
+// evt.preventDefault()
+
+// let origin = document.getElementById('departureAirport').value 
+// let destiny = document.getElementById('arrivalAirport').value
+// let departureDate = document.getElementById('departureDate').value
+// let returnDepartureDate = document.getElementById('returnDepartureDate').value
+// let passengers = document.getElementById('passangers')\
+
+
+// let departureAirport = showOptions(origin)
+// let arrivalAirport = showOptions(destiny)
+
+// let petition = `http://localhost:8888/${departureAirport}/${arrivalAirport}/${departureDate}/${returnDepartureDate}/${passangersPerAge.Babies}/${passangersPerAge.Kids}/${passangersPerAge.Kids12}/${passangersPerAge.Kids13}/${passangersPerAge.Kids14}/${passangersPerAge.Kids15}/${passangersPerAge.Adults}`
+
+// searchFlights(petition)
+// })
+
+
 let passengers = document.getElementById('passengersPax')
 let btnPassengers = document.getElementById('btn').addEventListener('click', passengersPerAge)
 
