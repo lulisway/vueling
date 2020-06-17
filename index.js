@@ -35,7 +35,7 @@ function passengersPerAge() {
 function renderPassengersDivs(passengersPax){
     let quantity = passengersPax
     let i = 0
-
+    document.getElementById("passengersAgeLabel").innerHTML = "Selecciona las edades";
     for(i = 0; i < quantity; i++) {
             console.log("iteraciones: " + i)
             let newDiv = document.createElement('div')
@@ -51,3 +51,11 @@ let search = document.getElementById('searchForm')
     console.log(hora)
  evt.preventDefault()
  })
+
+ function setPassengers() {
+    location.href = '#modal';
+  }
+
+ function closeModalVisible(){
+    document.getElementById("close").innerHTML = "ACEPTAR";
+ };
