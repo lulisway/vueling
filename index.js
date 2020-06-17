@@ -1,69 +1,151 @@
-// "use strict"
+//if mayor de 10 pax redirect a un html con info de la compañías para precios grupo
+//bebé problemas: bebé 1, resto edad, bebé 0
+//pasar fechas al mismo formato que recoger que del html recojamos eso
+//dar todos los resultados del buscador
+// let passengers = document.getElementById('passengersPax')
+// let btnPassengers = document.getElementById('btn').addEventListener('click', passengersPerAge)
+// function passengersPerAge() {
+//     let passengersPax = passengers.value
+//     renderPassengersDivs(passengersPax)
+// }
+// function renderPassengersDivs(passengersPax){
+//     let quantity = passengersPax
+//     let i = 0
+//     for(i = 0; i < quantity; i++) {
+//             console.log("iteraciones: " + i)
+//             let newDiv = document.createElement('div')
+//             newDiv.innerHTML = `<input type="number" id="passengerAge${i}" name="passengerAge"min="0" max="100">`
+//             document.getElementById('passengersAge').appendChild(newDiv)
+//     }
+//     return i;
+// };
 
+/// SELECT ORIGEN Y DESTINO ///
+const endpoint = 'https://gist.github.com/tdreyno/4278655'
+const cities = [];
 
-// let search = document.getElementById('searchForm')
-// search.addEventListener('submit', (evt)=>{
+console.log(cities);
 
-// evt.preventDefault()
+fetch(endpoint,{'Access-Control-Allow-Origin':'*'})
+    .then(blob => blob.json())
+    .then(data => cities.push(...data));
 
-// let origin = document.getElementById('departureAirport').value 
-// let destiny = document.getElementById('arrivalAirport').value
-// let departureDate = document.getElementById('departureDate').value
-// let returnDepartureDate = document.getElementById('returnDepartureDate').value
-// let passengers = document.getElementById('passangers')\
-
-
-// let departureAirport = showOptions(origin)
-// let arrivalAirport = showOptions(destiny)
-
-// let petition = `http://localhost:8888/${departureAirport}/${arrivalAirport}/${departureDate}/${returnDepartureDate}/${passangersPerAge.Babies}/${passangersPerAge.Kids}/${passangersPerAge.Kids12}/${passangersPerAge.Kids13}/${passangersPerAge.Kids14}/${passangersPerAge.Kids15}/${passangersPerAge.Adults}`
-
-// searchFlights(petition)
-// })
-
-
-let passengers = document.getElementById('passengersPax')
-let btnPassengers = document.getElementById('btn').addEventListener('click', passengersPerAge)
-
-
-function passengersPerAge() {
-    let passengersPax = passengers.value
-
-    //renderPassengersDivs(passengersPax)
-    renderAgeOptions(passengersPax)
+function findMatches(wordToMatch, cities) {
+    return cities.filter(place => {
+        const regex = new RegExp(wordToMatch, 'gi');
+        return place.city.match(regex) ||
+            place.code.match(regex);
+    });
 }
 
-let hora = document.getElementById('arrivalAirport').value
-let search = document.getElementById('searchForm')
- search.addEventListener('submit', (evt)=>{
-    console.log(hora)
- evt.preventDefault()
- })
-
-function renderAgeOptions(passengersPax){
-  let j = 0
-  let x = 0
-
-  for (x = 0; x < passengersPax ; x++){
-
-    let newDiv = document.createElement('div')
-            newDiv.innerHTML = `<select name="passengerAge" id="allPassengersAge${x}" required>
-                  <option value="" id="passangerAge${x}">Ingrese la edad del pasajero</option>
-                  <option value="1" id="passangerAge${x}">Bebé (de 0 a 23 meses)</option>
-            </select>`
-            document.getElementById('passengersAge').appendChild(newDiv)
-           
-
-          for(j = 2; j < 101; j++) {
-                  // console.log("iteraciones: " + i)
-                  let newPassengerDiv = document.createElement('option')  
-                  newPassengerDiv.setAttribute("value", `${j}`) 
-                  newPassengerDiv.setAttribute("id", `passangerAge${j}`)
-                  newPassengerDiv.text = `${j} años`
-                  document.getElementById(`allPassengersAge${x}`).appendChild(newPassengerDiv)
-                  console.log(j)
-    } 
-  }
-    return j
-
+function displayMatches(e) {
+    const matchedArray = findMatches(e.target.value, cities);
+    const html = matchedArray.map(place => {
+        const regex = new RegExp(e.target.value, 'gi');
+        const cityName = place.city.replace(regex,
+            `<span class=hl>${e.target.value}</span>`)
+        const codeName = place.code.replace(regex,
+            `<span class=hl>${e.target.value}</span>`)
+        return `
+            <li>
+                <span class="name">${cityName}, ${codeName}</span>
+            </li>
+        `
+    }).join('');
+    suggestions.innerHTML = html;
 }
+
+const search = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+search.addEventListener('change', displayMatches);
+search.addEventListener('keyup', displayMatches);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const endpoint= 'https://raw.githubusercontent.com/jbrooksuk/JSON-Airports/master/airports.json';
+// //const promise = fetch(endpoint);
+// //console.log(promise);
+
+// //fetch(endpoint).then(blob => console.log(blob));
+
+
+
+//     const cities = [];
+//     fetch(endpoint)
+//         .then(response => response.json())
+//         .then(data => cities.push(...data));
+//     console.log(cities);
+
+
+// /// /// regex /// ///
+// let wordToSearch= (/^[a-zA-Z]+$/g);
+
+
+//     function findMatches(wordToSearch, cities) {
+//         return cities.filter(data => {
+//             const regex = new RegExp(wordToSearch);
+//             return data.name.match(regex) ||
+//                 data.iata.match(regex);
+//         })
+//     }
+
+
+
+//     function displayMatches(e) {
+//         const matchedArray = findMatches(e.target.value, cities);
+//         const html = matchedArray.map(data => {
+//             const regex = new RegExp(e.target.value, 'gi');
+//             const cityName = data.name.replace(regex,
+//                 `<span class=hl>${e.target.value}</span>`)
+//             const iataName = data.iata.replace(regex,
+//                 `<span class=hl>${e.target.value}</span>`)
+//             return `
+//                 <li>
+//                     <span class="name">${cityName}, ${iataName}</span>
+//                 </li>
+//             `
+//         })
+//     }
+
+//     const search = document.querySelector('.search');
+  
+//     search.addEventListener('change', displayMatches);
+//     search.addEventListener('keyup', displayMatches);
+/// API CITY&IATA ///
+// const apiKey= "SbdRljJcvNx01MGGFI4iXAcueAiLmuNQ";
+// const secret= "lcVhKMfcR50kWaQs";
+
+// function findAirport(){
+//     let selectAirport= document.getElementById('departureAirport').value
+    
+//     fetch(`https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT,CITY&keyword=${selectAirport}&page[limit]=5`, {
+//         method:"GET"
+//     })
+//     .then(response =>{
+//         return response.json();
+//     })
+//     .then (data =>{
+//         let selectAirportOk= document.createElement("h1");
+//         selectAirportOk.appendChild(document.createTextNode('aeropuerto'));
+
+       
+//     }).catch((error) => {
+//         console.error('Error:', error);
+//     });
+// }
