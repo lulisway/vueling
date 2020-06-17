@@ -1,0 +1,18 @@
+body{
+    background-image: url(cielo_azul_nubes_naturaleza_2144x1424.jpg);
+}
+
+.centro{
+    display: flex;
+    justify-content: center;
+}
+
+
+.redondeado{
+    border-radius: 5px;
+}
+
+.columna{
+    display: flex;
+    flex-direction: column;
+}
