@@ -13,14 +13,19 @@
         <h1>Busca el vuelo mas barato!</h1>
     </div>
     <div class="centro">
-        <form action="" method="GET" id="searchForm">
+        <form action="" method="GET" id="searchForm" class="search-form">
             <div class="destiny">
                 <label for="departureAirport">Punto de origen</label>
-                <input type="text" id="departureAirport" name="departureAirport" class="redondeado">
+                <input type="text" id="departureAirport" name="departureAirport" class="search" placeholder="Ciudad o IATA">
 
                 <label for="arrivalAirport">Destino</label>
-                <input type="text" id="arrivalAirport" name="arrivalAirport" class="redondeado">
+                <input type="text" id="arrivalAirport" name="arrivalAirport" class="search">
             </div>
+            <ul class="suggestions">
+                <li>Filter for a city</li>
+                <li>or a state</li>
+            </ul>
+           
             <div>
                 <label for="departureDate">Fecha de ida</label>
                 <input type="date" name="departureDate" id="departureDate" class="redondeado">
@@ -28,21 +33,30 @@
                 <label for="returnDepartureDate">Fecha de retorno</label>
                 <input type="date" name="returnDepartureDate" id="returnDepartureDate" class="redondeado">
             </div>
-            <div>
-                <label for="passengersPax">Número de pasajeros (1-10):</label>
-                <input type="number" id="passengersPax" name="passengersPax" min="1" max="10">
-                <button id="btn"> Elija el numero de pasajeros </button>   
-            </div>
-            <div id="passengersAge" class="centro columna">
-                
-            </div>
+            <button id="btn-modal" onclick="setPassengers()" class="redondeado"> Pasajeros </button> 
             <div>
                 <input type="submit" class="redondeado">
             </div>
+        </form>        
+    </div>
 
-            
-        </form>
-        
+
+    <p><a href='#modal'></a></p>
+    <div id='modal' class='overlay'>
+        <div id='modalBody'>
+            <p id=score><p>
+            <a id='close' href='#'></a>
+            <div class='modalContent'>
+                <div>
+                <label for="passengersPax">Número de pasajeros (1-10):</label>
+                <input type="number" id="passengersPax" name="passengersPax" min="1" max="10">
+                <button id="btn" onclick="closeModalVisible()">Ok</button>   
+            </div>
+            <label for="passengersAge" id="passengersAgeLabel"></label>
+            <div id="passengersAge" class="centro columna">
+            </div>
+            </div>
+        </div>
     </div>
     <script src="index.js"></script> 
 </body>

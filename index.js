@@ -40,10 +40,11 @@ let search = document.getElementById('searchForm')
  evt.preventDefault()
  })
 
+
 function renderAgeOptions(passengersPax){
   let j = 0
   let x = 0
-
+  document.getElementById("passengersAgeLabel").innerHTML = "Selecciona las edades";
   for (x = 0; x < passengersPax ; x++){
 
     let newDiv = document.createElement('div')
@@ -65,7 +66,13 @@ function renderAgeOptions(passengersPax){
     } 
   }
     return j
-
 }
 
+ function setPassengers() {
+    location.href = '#modal';
+  }
+
+ function closeModalVisible(){
+    document.getElementById("close").innerHTML = "ACEPTAR";
+ };
 
