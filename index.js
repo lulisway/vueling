@@ -1,124 +1,169 @@
-// "use strict"
+"use strict"
 
-import { get } from "https"
+let arrayPassengers = []
+let search = document.getElementById('searchForm')
+search.addEventListener('submit', (evt)=>{
 
-
-// let search = document.getElementById('searchForm')
-// search.addEventListener('submit', (evt)=>{
-
-// evt.preventDefault()
+evt.preventDefault()
 
 // let origin = document.getElementById('departureAirport').value 
 // let destiny = document.getElementById('arrivalAirport').value
-// let departureDate = document.getElementById('departureDate').value
+
+
+let departureDate = getDepartureDate()
+let returnDepartureDate = getReturnDepartureDate()
+
+
+
 // let returnDepartureDate = document.getElementById('returnDepartureDate').value
 // let passengers = document.getElementById('passangers')
-
 
 
 // let departureAirport = showOptions(origin)
 // let arrivalAirport = showOptions(destiny)
 
-// let petition = `http://localhost:8888/${departureAirport}/${arrivalAirport}/${departureDate}/${returnDepartureDate}/${passangersPerAge.Babies}/${passangersPerAge.Kids}/${passangersPerAge.Kids12}/${passangersPerAge.Kids13}/${passangersPerAge.Kids14}/${passangersPerAge.Kids15}/${passangersPerAge.Adults}`
+let petition = `http://localhost:8888/origin: ${departureAirport}/destiny: ${arrivalAirport}/${departureDate.DepartureYear}/${departureDate.DepartureMonth}/${departureDate.DepartureDay}/${returnDepartureDate.ReturnDepartureYear}/${returnDepartureDate.ReturnDepartureMonth}/${returnDepartureDate.ReturnDepartureDay}/${arrayPassengers[0]}/${arrayPassengers[1]}/${arrayPassengers[2]}/${arrayPassengers[3]}/${arrayPassengers[4]}/${arrayPassengers[5]}/${arrayPassengers[6]}/${arrayPassengers[7]}/${arrayPassengers[8]}/${arrayPassengers[9]}`
+
+console.log("petition: " + petition)
 
 // searchFlights(petition)
-// })
+})
 
 
-let passengers = document.getElementById('passengersPax')
+
 let btnPassengers = document.getElementById('btn').addEventListener('click', passengersPerAge)
 
 
 function passengersPerAge() {
-    let passengersPax = passengers.value
-
+    
+    let passengersPax = document.getElementById('passengersPax').value
+    
     //renderPassengersDivs(passengersPax)
     renderAgeOptions(passengersPax)
- 
 }
 
+
+
+
 function renderAgeOptions(passengersPax){
+  // Función hija
+  function generatePassengersOptions(value, content){
+    let newPassengerDiv = document.createElement('option') 
+
+    newPassengerDiv.setAttribute("value", value) 
+    newPassengerDiv.text = content
+    
+    return newPassengerDiv
+  }
+
+   
   let j = 0
   let x = 0
-  document.getElementById("passengersAgeLabel").innerHTML = "Selecciona las edades";
+  // document.getElementById("passengersAgeLabel").innerHTML = "Selecciona las edades";
   for (x = 0; x < passengersPax ; x++){
 
     let newDiv = document.createElement('div')
-            newDiv.innerHTML = `<select name="passengerAge" id="allPassengersAge${x}" required>
-                  <option value="" id="passangerAge${x}">Ingrese la edad del pasajero</option>
-                  <option value="1" id="passangerAge${x}">Bebé (de 0 a 23 meses)</option>
-            </select>`
-            document.getElementById('passengersAge').appendChild(newDiv)
-           
+    newDiv.innerHTML = `<select name="passengerAge" id="passengersAge${x}" required></select>`
+    document.getElementById('passengersAge').appendChild(newDiv)
+    drawPassengers(x)
 
-          for(j = 2; j < 101; j++) {
-                  // console.log("iteraciones: " + i)
-                  let newPassengerDiv = document.createElement('option')  
-                  newPassengerDiv.setAttribute("value", `${j}`) 
-                  newPassengerDiv.setAttribute("id", `passangerAge${j}`)
-                  newPassengerDiv.text = `${j} años`
-                  document.getElementById(`allPassengersAge${x}`).appendChild(newPassengerDiv)
-                  console.log(j)
-    } 
-  }
-    return j
-}
-
-//  function setPassengers() {
-//     location.href = '#modal';
-//   }
-
-//  function closeModalVisible(){
-//     document.getElementById("close").innerHTML = "ACEPTAR";
-//  };
-
-
-let passengerAge0 = 1
-let passengerAge1 = 0
-let passengerAge2 = 0
-let passengerAge3 = 0
-let passengerAge4 = 0
-let passengerAge5 = 0
-let passengerAge6 = 0
-let passengerAge7 = 0
-let passengerAge8 = 0
-let passengerAge9 = 0
-
-let btnEachP
-
-let passengerAge0 = document.getElementById('passangerAge0').addEventListener('input', getPassenger)
-let passengerAge1 = document.getElementById('passangerAge1').addEventListener('input', getPassenger)
-let passengerAge2 = document.getElementById('passangerAge2').addEventListener('input', getPassenger)
-let passengerAge3 = document.getElementById('passangerAge3').addEventListener('input', getPassenger)
-let passengerAge4 = document.getElementById('passangerAge4').addEventListener('input', getPassenger)
-let passengerAge5 = document.getElementById('passangerAge5').addEventListener('input', getPassenger)
-let passengerAge6 = document.getElementById('passangerAge6').addEventListener('input', getPassenger)
-let passengerAge7 = document.getElementById('passangerAge7').addEventListener('input', getPassenger)
-let passengerAge8 = document.getElementById('passangerAge8').addEventListener('input', getPassenger)
-let passengerAge9 = document.getElementById('passangerAge9').addEventListener('input', getPassenger)
-
-
-
-
-
-function arrayOfPassengers(e){
-  let arrayPassengers = []
-  let passenger = e.srcElement.value
-  if(passenger !== null) {
-    arrayPassengers.push(e.srcElement.value)
-  }
-  else {
-
+    document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions("","Ingrese la edad del pasajero"))
+    document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions("Bebé (0 a 23 meses)","Bebé (de 0 a 23 meses)"))
+     
+    
+        for(j = 2; j < 101; j++) {
+          document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions(j,j))
+          
+        } 
+      
+    
   }
   
-}
+  function drawPassengers(x){
+    
+    let passenger = document.getElementById(`passengersAge${x}`)
+    passenger.addEventListener('change', () =>{
+    let newPassengerAge = document.createElement('p')
+    newPassengerAge.setAttribute("value", x)
+    newPassengerAge.setAttribute("id", x) 
+    newPassengerAge.innerHTML = `Pasajero ${x+1}: ${passenger.value}`
+    document.getElementById('selectedPassengers').appendChild(newPassengerAge)
+    arrayPassengers.push(`${passenger.value}`)
+    console.log("valor de cada pasajero: " + passenger.value)
+    console.log("Array of pass: " + arrayPassengers)
+    })
+    }
+  }
+  
+// function allPassengers(){
+//   let arrayPassengers = []
 
-console.log(arrayPassangers)
+//   for (i = 0; i < 10 ; i++){
+//       document.getElementById(`passengersAge${x}`).value
+//   }
 
-// let hora = document.getElementById('arrivalAirport').value
-// let search = document.getElementById('searchForm')
-//  search.addEventListener('submit', (evt)=>{
-//     console.log(hora)
-//  evt.preventDefault()
-//  })
+
+
+//   let allPassengersAge = {
+//               Pass1 :
+//   }
+
+
+//   return allPassengersAge
+// }
+  
+  
+  
+  // return arrayPassengers
+
+
+
+// ---- VENTANA MODAL ---- //
+ function setPassengers() {
+    location.href = '#modal';
+  }
+
+ function closeModalVisible(){
+    document.getElementById("close").innerHTML = "ACEPTAR";
+ };
+
+
+
+
+
+
+ // ---- FECHAS IDA Y VUELTA ---- //
+
+
+function getDepartureDate(){
+  let departureDate = document.getElementById('departureDate').value;
+  let departureYear = parseInt(departureDate.toString().substr(0,4));
+  let departureMonth = parseInt(departureDate.toString().substr(5,2));
+  let departureDay = parseInt(departureDate.toString().substr(8,2));
+  let departureDateObj = {
+                          DepartureYear : departureYear,
+                          DepartureMonth : departureMonth,
+                          DepartureDay : departureDay
+                        }
+  return departureDateObj
+
+
+};
+
+
+
+function getReturnDepartureDate(){
+  let returnDepartureDate= document.getElementById('returnDepartureDate').value;
+  let returnDepartureYear=parseInt(returnDepartureDate.toString().substr(0,4));
+  let returnDepartureMonth=parseInt(returnDepartureDate.toString().substr(5,2));
+  let returnDepartureDay=parseInt(returnDepartureDate.toString().substr(8,2));
+  let returnDepartureDateObj = {
+                                ReturnDepartureYear : returnDepartureYear,
+                                ReturnDepartureMonth : returnDepartureMonth,
+                                ReturnDepartureDay : returnDepartureDay
+                              }
+  return returnDepartureDateObj
+  
+};
+
 

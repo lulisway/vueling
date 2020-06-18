@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Air Omega</title>
 </head>
 
@@ -34,6 +34,7 @@
                 <input type="date" name="returnDepartureDate" id="returnDepartureDate" class="redondeado">
             </div>
             <button id="btn-modal" onclick="setPassengers()" class="redondeado"> Pasajeros </button> 
+            <div id="selectedPassengers"></div>
             <div>
                 <input type="submit" class="redondeado">
             </div>
@@ -55,6 +56,8 @@
             <label for="passengersAge" id="passengersAgeLabel"></label>
             <div id="passengersAge" class="centro columna">
             </div>
+            <div>
+                <input type="submit" class="redondeado" value="buscar vuelo">
             </div>
         </div>
     </div>
