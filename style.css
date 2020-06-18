@@ -1,0 +1,58 @@
+body{
+    background-image: url(images/cielo_azul_nubes_naturaleza_2144x1424.jpg);
+}
+
+.centro{
+    display: flex;
+    justify-content: center;
+}
+
+
+.redondeado{
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.columna{
+    display: flex;
+    flex-direction: column;
+}
+
+/*-----------------modal--------------*/
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+#modalBody{
+    width: 46%;
+    padding: 2%;
+    border-radius: 15px;
+    box-shadow: 0 0 5px #CCC;
+    background: #FFF;
+    position: relative;
+    transition: all 5s ease-in-out;
+    margin:7% auto;    
+}
+
+#close{
+    position: absolute;
+    up: 20px;
+    right: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000000;
+}
