@@ -3,19 +3,7 @@
 // import { writeHeapSnapshot } from "v8"
 
 let arrayPassengers = []
-function writePassengers(arrayPassengers){
-  let i
-  let passengersUrl
-  let result = ""
-    for (i=0; i < arrayPassengers.length; i++){
-      passengersUrl = arrayPassengers[i].toString()
-      result += `/${passengersUrl}`
-      console.log(result)
-      
-    }
-    return result
-    
-}
+
 
 let search = document.getElementById('searchForm')
 search.addEventListener('submit', (evt)=>{
@@ -32,6 +20,19 @@ console.log(getDepartureDate())
 console.log(getReturnDepartureDate())
 
 let aditionalPassengers = writePassengers(arrayPassengers)
+function writePassengers(arrayPassengers){
+  let i
+  let passengersUrl
+  let result = ""
+    for (i=0; i < arrayPassengers.length; i++){
+      passengersUrl = arrayPassengers[i].toString()
+      result += `/${passengersUrl}`
+      console.log(result)
+      
+    }
+    return result
+    
+}
 
 
 
@@ -93,7 +94,6 @@ function renderAgeOptions(passengersPax){
     return newPassengerDiv
   }
 
-   
   let j = 0
   let x = 0
   
@@ -114,12 +114,11 @@ function renderAgeOptions(passengersPax){
         } 
   }
   
-  function drawPassengers(x){
 
-    
-    
+  function drawPassengers(x){
     let passenger = document.getElementById(`passengersAge${x}`)
     passenger.addEventListener('change', () =>{
+    
     let newPassengerAge = document.createElement('p')
     newPassengerAge.setAttribute("value", x)
     newPassengerAge.setAttribute("id", x) 
@@ -127,25 +126,22 @@ function renderAgeOptions(passengersPax){
     newPassengerAge.innerHTML = `Pasajero ${x+1}: ${passenger.value}`
     document.getElementById('selectedPassengers').appendChild(newPassengerAge)
     arrayPassengers.push(`${passenger.value}`)
+    
     console.log("valor de cada pasajero: " + passenger.value)
     console.log("Array of pass: " + arrayPassengers)
     })
     }
-  }
+  
 
-  function aditionalPassengers(arrayPassengers){
-    let optionalPassengers = arrayPassengers.
-  }
+  // function aditionalPassengers(arrayPassengers){
+  //   let optionalPassengers = arrayPassengers.
+  // }
 
 
-
-     
 
       
 
-  
-  
-
+    
 
 
 
