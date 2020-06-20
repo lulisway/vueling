@@ -36,6 +36,11 @@ h1,h2{
     border-radius: 3px;
     box-shadow: 5px 5px 5px #000000b3;
 }
+
+#passengersQuantity {
+    display: flex;
+    flex-direction: row;
+}
 .centro{
     display: flex;
     justify-content: center;

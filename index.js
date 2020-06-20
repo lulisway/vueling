@@ -3,6 +3,19 @@
 // import { writeHeapSnapshot } from "v8"
 
 let arrayPassengers = []
+function writePassengers(arrayPassengers){
+  let i
+  let passengersUrl
+  let result = ""
+    for (i=0; i < arrayPassengers.length; i++){
+      passengersUrl = arrayPassengers[i].toString()
+      result += `/${passengersUrl}`
+      console.log(result)
+      
+    }
+    return result
+    
+}
 
 let search = document.getElementById('searchForm')
 search.addEventListener('submit', (evt)=>{
@@ -19,6 +32,8 @@ console.log(getDepartureDate())
 console.log(getReturnDepartureDate())
 
 let aditionalPassengers = writePassengers(arrayPassengers)
+
+
 
 
 
@@ -43,64 +58,38 @@ console.log("petition: " + petition)
 
 let passengers = document.getElementById('passengersPax')
 let btnPassengers = document.getElementById('passengersPax').addEventListener('change', passengersPerAge)
-let labelAges=document.getElementById('passengersPax').addEventListener('change', LabelAges)
+let labelAges = document.getElementById('passengersPax').addEventListener('change', LabelAges)
 
 function LabelAges(){
   document.getElementById("label-ages").innerHTML = "Selecciona sus edades";
 }
 
-function borrarChilds () {
-    var div = document.getElementById('passengersAge');
-while (div.firstChild) {
-    div.removeChild(div.firstChild);
-}
-}
+
 
 function passengersPerAge() {
-    let passengersPax = passengers.value
-    borrarChilds()
-    renderPassengersDivs(passengersPax)
-}
 
-function renderPassengersDivs(passengersPax){
-    let quantity = passengersPax
-    let i = 0;
-    for(i = 0; i < quantity; i++) {
-            console.log("iteraciones: " + i)
-            let newDiv = document.createElement('div')
-            newDiv.innerHTML = `<input type="number" id="passengerAge${i}" name="passengerAge"min="0" max="100">`
-            document.getElementById('passengersAge').appendChild(newDiv)
-    } 
-    
-    return i
-
-function passengersPerAge() {
-    
-    let passengersPax = document.getElementById('passengersPax').value
-    
+  let passengersPax = passengers.value
     //renderPassengersDivs(passengersPax)
+    borrarChilds()
     renderAgeOptions(passengersPax)
+
+
+  function borrarChilds () {
+    let div = document.getElementById('passengersAge');
+      while (div.firstChild) {
+            div.removeChild(div.firstChild);
+  }
+  }
 }
-let hora = document.getElementById('arrivalAirport').value
-let search = document.getElementById('searchForm')
- search.addEventListener('submit', (evt)=>{
-     
-    console.log(hora)
- evt.preventDefault()
- })
-
-
 
 
 function renderAgeOptions(passengersPax){
-  // Función hija
+  // Función hija -- Closure
   function generatePassengersOptions(value, content){
     let newPassengerDiv = document.createElement('option') 
 
     newPassengerDiv.setAttribute("value", value) 
     newPassengerDiv.text = content
-    
-    
     return newPassengerDiv
   }
 
@@ -134,6 +123,7 @@ function renderAgeOptions(passengersPax){
     let newPassengerAge = document.createElement('p')
     newPassengerAge.setAttribute("value", x)
     newPassengerAge.setAttribute("id", x) 
+    newPassengerAge.text = `Pasajero n°${x+1}: ${passenger.value} años`
     newPassengerAge.innerHTML = `Pasajero ${x+1}: ${passenger.value}`
     document.getElementById('selectedPassengers').appendChild(newPassengerAge)
     arrayPassengers.push(`${passenger.value}`)
@@ -143,25 +133,13 @@ function renderAgeOptions(passengersPax){
     }
   }
 
-  // function aditionalPassengers(arrayPassengers){
-  //   let optionalPassengers = arrayPassengers.
-  // }
+  function aditionalPassengers(arrayPassengers){
+    let optionalPassengers = arrayPassengers.
+  }
 
 
 
-      function writePassengers(arrayPassengers){
-        let i
-        let passengersUrl
-        let result = ""
-          for (i=0; i < arrayPassengers.length; i++){
-            passengersUrl = arrayPassengers[i].toString()
-            result += `/${passengersUrl}`
-            console.log(result)
-            
-          }
-          return result
-          
-      }
+     
 
       
 
