@@ -1,6 +1,9 @@
 "use strict"
 
+// import { writeHeapSnapshot } from "v8"
+
 let arrayPassengers = []
+
 let search = document.getElementById('searchForm')
 search.addEventListener('submit', (evt)=>{
 
@@ -12,26 +15,34 @@ evt.preventDefault()
 
 let departureDate = getDepartureDate()
 let returnDepartureDate = getReturnDepartureDate()
+console.log(getDepartureDate())
+console.log(getReturnDepartureDate())
+
+let aditionalPassengers = writePassengers(arrayPassengers)
 
 
 
-// let returnDepartureDate = document.getElementById('returnDepartureDate').value
-// let passengers = document.getElementById('passangers')
+//let returnDepartureDate = document.getElementById('returnDepartureDate').value
+let passengers = document.getElementById('passangers')
 
 
 // let departureAirport = showOptions(origin)
 // let arrivalAirport = showOptions(destiny)
 
-let petition = `http://localhost:8888/origin: ${departureAirport}/destiny: ${arrivalAirport}/${departureDate.DepartureYear}/${departureDate.DepartureMonth}/${departureDate.DepartureDay}/${returnDepartureDate.ReturnDepartureYear}/${returnDepartureDate.ReturnDepartureMonth}/${returnDepartureDate.ReturnDepartureDay}/${arrayPassengers[0]}/${arrayPassengers[1]}/${arrayPassengers[2]}/${arrayPassengers[3]}/${arrayPassengers[4]}/${arrayPassengers[5]}/${arrayPassengers[6]}/${arrayPassengers[7]}/${arrayPassengers[8]}/${arrayPassengers[9]}`
+// let petition = `http://localhost:8888/search/${departureAirport}/${arrivalAirport}/${departureDate.DepartureYear}/${departureDate.DepartureMonth}/${departureDate.DepartureDay}/${returnDepartureDate.ReturnDepartureYear}/${returnDepartureDate.ReturnDepartureMonth}/${returnDepartureDate.ReturnDepartureDay}/${arrayPassengers[0]}&p2=${arrayPassengers[1]}&p3=${arrayPassengers[2]}/${arrayPassengers[3]}/${arrayPassengers[4]}/${arrayPassengers[5]}/${arrayPassengers[6]}/${arrayPassengers[7]}/${arrayPassengers[8]}/${arrayPassengers[9]}`
+
+let petition = `http://localhost:8888/search/${departureAirport}/${arrivalAirport}/${departureDate}/${returnDepartureDate}${aditionalPassengers}`
 
 console.log("petition: " + petition)
 
 // searchFlights(petition)
+
 })
 
 
 
 let btnPassengers = document.getElementById('btn').addEventListener('click', passengersPerAge)
+
 
 
 function passengersPerAge() {
@@ -53,6 +64,7 @@ function renderAgeOptions(passengersPax){
     newPassengerDiv.setAttribute("value", value) 
     newPassengerDiv.text = content
     
+    
     return newPassengerDiv
   }
 
@@ -68,18 +80,18 @@ function renderAgeOptions(passengersPax){
     drawPassengers(x)
 
     document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions("","Ingrese la edad del pasajero"))
-    document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions("Bebé (0 a 23 meses)","Bebé (de 0 a 23 meses)"))
+    document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions("1","Bebé (de 0 a 23 meses)"))
      
     
         for(j = 2; j < 101; j++) {
-          document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions(j,j))
+          document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions(j.toString(),j.toString()))
           
         } 
-      
-    
   }
   
   function drawPassengers(x){
+
+    
     
     let passenger = document.getElementById(`passengersAge${x}`)
     passenger.addEventListener('change', () =>{
@@ -94,27 +106,32 @@ function renderAgeOptions(passengersPax){
     })
     }
   }
+
+  // function aditionalPassengers(arrayPassengers){
+  //   let optionalPassengers = arrayPassengers.
+  // }
+
+
+
+      function writePassengers(arrayPassengers){
+        let i
+        let passengersUrl
+        let result = ""
+          for (i=0; i < arrayPassengers.length; i++){
+            passengersUrl = arrayPassengers[i].toString()
+            result += `/${passengersUrl}`
+            console.log(result)
+            
+          }
+          return result
+          
+      }
+
+      
+
   
-// function allPassengers(){
-//   let arrayPassengers = []
-
-//   for (i = 0; i < 10 ; i++){
-//       document.getElementById(`passengersAge${x}`).value
-//   }
-
-
-
-//   let allPassengersAge = {
-//               Pass1 :
-//   }
-
-
-//   return allPassengersAge
-// }
   
-  
-  
-  // return arrayPassengers
+
 
 
 
@@ -133,6 +150,7 @@ function renderAgeOptions(passengersPax){
 
 
  // ---- FECHAS IDA Y VUELTA ---- //
+ /// ACORDARSE DE CONTARLES LA ALTERNATIVA CON LAS FECHAS A TODO EL GRUPO ///
 
 
 function getDepartureDate(){
@@ -145,8 +163,8 @@ function getDepartureDate(){
                           DepartureMonth : departureMonth,
                           DepartureDay : departureDay
                         }
-  return departureDateObj
-
+  return departureDate
+  //return departureDateObj
 
 };
 
@@ -162,7 +180,27 @@ function getReturnDepartureDate(){
                                 ReturnDepartureMonth : returnDepartureMonth,
                                 ReturnDepartureDay : returnDepartureDay
                               }
-  return returnDepartureDateObj
+
+  console.log("fecha" + returnDepartureDate)
+  return returnDepartureDate
+  //return returnDepartureDateObj
+  
+};
+
+// ---- SEGUNDA VERSION DE FECHA ---- //
+
+function getReturnDepartureDate(){
+  let returnDepartureDate= document.getElementById('returnDepartureDate').value;
+  let returnDepartureYear=parseInt(returnDepartureDate.toString().substr(0,4));
+  let returnDepartureMonth=parseInt(returnDepartureDate.toString().substr(5,2));
+  let returnDepartureDay=parseInt(returnDepartureDate.toString().substr(8,2));
+  let returnDepartureDateObj = {
+                                ReturnDepartureYear : returnDepartureYear,
+                                ReturnDepartureMonth : returnDepartureMonth,
+                                ReturnDepartureDay : returnDepartureDay
+                              }
+  //return returnDepartureDateObj
+  return returnDepartureDate
   
 };
 
