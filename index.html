@@ -4,40 +4,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.ico"/>
     <link rel="stylesheet" href="style.css">
     <title>Air Omega</title>
 </head>
 
 <body>
-    <div class="centro">
-        <h1>Busca el vuelo mas barato!</h1>
+    <div class="header">
+    <div class="title">
+        <h1>Buscator <br></h1>
+        <h2>El vuelo mas barato!</h2>
     </div>
-    <div class="centro">
+</div>
+    <div class="content">
         <form action="" method="GET" id="searchForm" class="search-form">
             <div class="destiny">
+                <div class="dark">
                 <label for="departureAirport">Punto de origen</label>
                 <input type="text" id="departureAirport" name="departureAirport" class="search" placeholder="Ciudad o IATA">
-
+                </div>
+                <div class="light">
                 <label for="arrivalAirport">Destino</label>
-                <input type="text" id="arrivalAirport" name="arrivalAirport" class="search">
+                <input type="text" id="arrivalAirport" name="arrivalAirport" class="search" placeholder="Ciudad o IATA">
+                </div>
             </div>
-            <ul class="suggestions">
+          <!--  <ul class="suggestions">
                 <li>Filter for a city</li>
                 <li>or a state</li>
-            </ul>
+            </ul>-->
            
-            <div>
-                <label for="departureDate">Fecha de ida</label>
-                <input type="date" name="departureDate" id="departureDate" class="redondeado">
+            <div class="destiny">
+                <div class="dark-b">
+                    <label for="departureDate">Fecha de ida</label>
+                    <input type="date" name="departureDate" id="departureDate" class="redondeado">
 
-                <label for="returnDepartureDate">Fecha de retorno</label>
-                <input type="date" name="returnDepartureDate" id="returnDepartureDate" class="redondeado">
+                    <label for="returnDepartureDate">Fecha de retorno</label>
+                    <input type="date" name="returnDepartureDate" id="returnDepartureDate" class="redondeado">
+                </div>
             </div>
-            <button id="btn-modal" onclick="setPassengers()" class="redondeado"> Pasajeros </button> 
+            <button id="btn-modal" class="btn-modal" onclick="setPassengers()"> Pasajeros </button> 
             <div>
-                <input type="submit" class="redondeado">
+                <input type="submit" id="btn-search" onclick="callResponse()" value="Buscar">
             </div>
         </form>        
+    </div>
+    <div>
+        <div class="response" id="response">
+            <div id="flightInfo">
+                <div class="dark">
+                <div class="simple">
+                    <div>        
+                        <label for="LabelDeparture">LabelDeparture <br></label>
+                        <input type="text" id="LabelDeparture" name="LabelDeparture" placeholder="DepartureAirport.value"> 
+                    </div>
+                    <div>
+                        <label for="LabelArrival">LabelArrival <br></label>
+                        <input type="text" id="LabelArrival" name="LabelArrival" placeholder="arrivalAirport.value">
+                    </div>
+                </div>
+            </div>
+            <div class="dark">
+                <div class="compound">
+                    <div>
+                        <label for="LabelDepartureDate">LabelDepartureDate <br></label>
+                        <input type="text" id="LabelDepartureDate" name="LabelDepartureDate" placeholder="DepartureDate.value">
+                    </div>
+                    <div>
+                        <label for="LabelDepartureTime">LDT <br></label>
+                        <input type="text" id="DepartureTime" name="DepartureTime" class="time-box" placeholder="DepartureTime">
+                    </div>
+                    <div>
+                        <label for="LabelArrivalTime">LAT <br></label>
+                        <input type="text" id="ArrivalTime" name="ArrivalTime" class="time-box" placeholder="ArrivalTime">
+                    </div>
+                </div>
+            </div>
+                <div class="dark-b">
+                <div class="simple">
+                    <div>
+                        <label for="LabelReturnD">LabelReturnD <br></label>
+                        <input type="text" id="LabelReturnD" name="LabelReturnD" placeholder="Partida de retorno">
+                    </div>
+                    <div>
+                        <label for="LabelReturnA">LabelReturnA <br></label>
+                        <input type="text" id="LabelReturnA" name="LabelReturnA" placeholder="Destino de retorno">
+                    </div>                    
+                </div>
+            </div>
+            <div class="dark-b">
+                <div class="compound">
+                    <div>
+                        <label for="LabelReturnDate">LabelReturnDate <br></label>
+                        <input type="text" id="LabelReturnDate" name="LabelReturnDate" placeholder="returnDate.value">
+                    </div>
+                    <div>
+                        <label for="LabelReturnTime">LRT <br></label>
+                        <input type="text" id="ReturnDepartureTime" name="ReturnDepartureTime" class="time-box" placeholder="ReturnDepartureTime">
+                    </div>
+                    <div>
+                        <label for="LabelArrivalTime">LAT <br></label>
+                        <input type="text" id="ReturnArrivalTime" name="ReturnArrivalTime" class="time-box" placeholder="ReturnArrivalTime">  
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div id="priceInfo">
+                <div id="pricePax">
+                    <label for="LabelPassengers">LabelPassengers <br></label>
+                    <input type="text" id="LabelPassengers" name="LabelPassengers" placeholder="PassengersPax.value">
+                </div>
+                <div id="price">
+                    <label for="Final value">Final value <br></label>
+                    <input type="text" id="Final value" name="Final value" placeholder="$">
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
@@ -48,15 +130,14 @@
             <a id='close' href='#'></a>
             <div class='modalContent'>
                 <div>
-                <label for="passengersPax">Número de pasajeros (1-10):</label>
+                <label for="passengersPax">Número de pasajeros (1-10):<br/></label>
                 <input type="number" id="passengersPax" name="passengersPax" min="1" max="10">
-                <button id="btn" onclick="closeModalVisible()">Ok</button>   
             </div>
-            <label for="passengersAge" id="passengersAgeLabel"></label>
+            <label for="passengersAge" id="label-ages"></label>
             <div id="passengersAge" class="centro columna">
             </div>
             <div>
-                <input type="submit" class="redondeado" value="buscar vuelo">
+                <input type="submit" onclick="closeModal()" class="btn-modal" value="buscar vuelo" id="btn-search-modal">
             </div>
         </div>
     </div>
