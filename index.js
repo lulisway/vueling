@@ -23,30 +23,51 @@
 
 
 let passengers = document.getElementById('passengersPax')
-let btnPassengers = document.getElementById('btn').addEventListener('click', passengersPerAge)
+let btnPassengers = document.getElementById('passengersPax').addEventListener('change', passengersPerAge)
+let labelAges=document.getElementById('passengersPax').addEventListener('change', LabelAges)
 
+function LabelAges(){
+  document.getElementById("label-ages").innerHTML = "Selecciona sus edades";
+}
+
+function borrarChilds () {
+    var div = document.getElementById('passengersAge');
+while (div.firstChild) {
+    div.removeChild(div.firstChild);
+}
+}
 
 function passengersPerAge() {
     let passengersPax = passengers.value
-
-    //renderPassengersDivs(passengersPax)
-    renderAgeOptions(passengersPax)
+    borrarChilds()
+    renderPassengersDivs(passengersPax)
 }
 
+function renderPassengersDivs(passengersPax){
+    let quantity = passengersPax
+    let i = 0;
+    for(i = 0; i < quantity; i++) {
+            console.log("iteraciones: " + i)
+            let newDiv = document.createElement('div')
+            newDiv.innerHTML = `<input type="number" id="passengerAge${i}" name="passengerAge"min="0" max="100">`
+            document.getElementById('passengersAge').appendChild(newDiv)
+    } 
+    
+    return i
+}
 let hora = document.getElementById('arrivalAirport').value
 let search = document.getElementById('searchForm')
  search.addEventListener('submit', (evt)=>{
+     
     console.log(hora)
  evt.preventDefault()
  })
 
-
 function renderAgeOptions(passengersPax){
   let j = 0
   let x = 0
-  document.getElementById("passengersAgeLabel").innerHTML = "Selecciona las edades";
+  
   for (x = 0; x < passengersPax ; x++){
-
     let newDiv = document.createElement('div')
             newDiv.innerHTML = `<select name="passengerAge" id="allPassengersAge${x}" required>
                   <option value="" id="passangerAge${x}">Ingrese la edad del pasajero</option>
@@ -72,7 +93,17 @@ function renderAgeOptions(passengersPax){
     location.href = '#modal';
   }
 
- function closeModalVisible(){
-    document.getElementById("close").innerHTML = "ACEPTAR";
+ function closeModal(){
+  location.href = '#';
  };
 
+ function callResponse(){
+  var x = document.getElementById("response");
+  if (x.style.display === "none") {
+    x.style.display = "flex";
+    location.href = '#response';
+  } else {
+    x.style.display = "none";
+  }
+ }
+ 
