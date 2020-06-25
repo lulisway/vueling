@@ -1,0 +1,9 @@
+.DS_Store
+
+node_modules
+
+cypress
+
+chromedriver
+
+trash.css

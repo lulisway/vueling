@@ -1,0 +1,253 @@
+*{
+    font-family: Helvetica, arial, sans-serif;
+}
+body{
+    background-color: #D6D6D6;
+}
+.header{
+    background-image: url(images/avion.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 400px;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    background-color: #999797;
+}
+
+.destiny{
+    display: flex;
+}
+
+.search{
+    border-radius: 3px;
+}
+h1,h2{
+    text-align: end;
+}
+
+.title{
+    max-width: 25%;
+    background-color: #F5E460;
+    margin-left: 10%;
+    padding: 1%;
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px #000000b3;
+}
+
+#passengersQuantity {
+    display: flex;
+    flex-direction: row;
+}
+.centro{
+    display: flex;
+    justify-content: center;
+}
+
+.response{
+    display: flex;
+}
+
+.redondeado{
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.columna{
+    display: flex;
+    flex-direction: column;
+}
+
+.price{
+    display: flex;
+    flex-direction: column;
+}
+
+.departure{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    flex-wrap: wrap;
+}
+
+.pair{
+    max-width: 50%;
+}
+
+.response{
+    display: flex;
+    justify-content: center;
+}
+.return{
+    display: flex;
+    justify-content: center;
+}
+
+.time-box{
+    background-color: gold;
+    width: 80px;
+}
+
+.dark{
+    background-color: #595959;
+    color: #ffffff;
+    padding: 2% 15px;
+    border-top-left-radius:3px
+    }
+
+.dark-b{
+    background-color: #727272;
+    color: #ffffff;
+    padding: 2% 15px;
+    min-width: 545px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    }
+
+.response .dark-b{
+    box-shadow: 5px 5px 5px #000000b3;
+}
+
+.response .dark:first-of-type{
+    border-top-right-radius: 3px;
+}
+.response .dark:nth-of-type(2){
+    border-top-left-radius: 0px;
+}
+
+.response .dark-b:nth-of-type(3){
+    border-bottom-left-radius:0px;
+}
+.response .dark {
+    box-shadow: 5px 5px 5px #000000b3;
+}
+
+
+.light{
+    color: #595959;
+    background-color: #ffffff;
+    padding: 2% 15px;
+    border-top-right-radius: 3px;
+    }
+              
+             
+#btn-search{
+    background-color: #E7C130;
+    width: 90px;
+    height:30px;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 2%;
+
+}
+
+#btn-search-modal{
+    position: absolute;
+    top: 45px;
+    right: 30px;
+}
+
+#departureDate{
+    margin-right: 10%;
+}
+.btn-modal{
+    background-color: #595959;
+    color: #ffffff;
+    width: 90px;
+    height:30px;
+    border: none;
+    margin: 2% 0;
+    border-radius: 3px;
+}
+
+.response{
+    display: none;
+}
+
+.simple{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5%;
+    color: #ffffff;
+}
+.compound{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5%;
+    color: #ffffff;
+}
+
+/* .simple input{
+} */
+#flightInfo{
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+}
+#priceInfo{
+    margin-top: 1%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #595959;
+    background-color: #ffffff;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    height: min-content;
+    box-shadow: 5px 5px 5px #000000b3;
+}
+
+#price{
+    background-color: gold;
+}
+
+#pricePax{
+    margin-bottom: 10%;
+    background-color: gold;
+}
+
+/*-----------------modal--------------*/
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+#modalBody{
+    width: 25%;
+    padding: 2%;
+    border-radius: 15px;
+    box-shadow: 0 0 5px #CCC;
+    background-color: gold;
+    opacity: 90%;
+    position: relative;
+    transition: all 5s ease-in-out;
+    margin:7% auto;    
+}
+
+#close{
+    position: absolute;
+    top:20px;
+    right: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000000;
+}
