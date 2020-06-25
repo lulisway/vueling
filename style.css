@@ -179,8 +179,13 @@ h1,h2{
     color: #ffffff;
 }
 
+<<<<<<< HEAD
 /* .simple input{
 } */
+=======
+.simple input{
+}
+>>>>>>> 02c44afddd94c7fcb6a18a9aff621ba70f8d3df2
 #flightInfo{
     display: flex;
     flex-direction: column;

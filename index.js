@@ -63,7 +63,6 @@ let data = {
 
 
 
-
 // -------------- DATES INPUTS FUNCTIONS ------------- //
 
  /// ACORDARSE DE CONTARLES LA ALTERNATIVA CON LAS FECHAS A TODO EL GRUPO ///
@@ -119,13 +118,7 @@ function passengersPerAge() {
   }
 }
 
-  function deleteChilds () {
-    let div = document.getElementById('passengersAge');
-      while (div.firstChild) {
-            div.removeChild(div.firstChild);
-      }
-  }
-
+ 
 
 function renderAgeOptions(passengersPax){
   // Funciones hijas -- Closures
