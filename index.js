@@ -43,6 +43,8 @@ function pintar(data) {
   returnArrivalTime.innerHTML = data.returnArrivalTime
 }
 
+//---------Flight Direction----------
+
 /* Ejemplo del objeto que recibiria por fetch
 let data = {
   departureAirport: "MAD",
@@ -82,7 +84,6 @@ let data = {
   //return departureDateObj
 };
 
-
 function getReturnDepartureDate(){
   let returnDepartureDate= document.getElementById('returnDepartureDate').value;
   let returnDepartureYear=parseInt(returnDepartureDate.toString().substr(0,4));
@@ -96,6 +97,14 @@ function getReturnDepartureDate(){
   return returnDepartureDate
   //return returnDepartureDateObj
 };
+
+function functDir(){
+  if(document.getElementById('selectDir').value == "departure") {
+    document.getElementById("returnDepartureDateDiv").style.display = "none";
+    returnDepartureDate=null;
+  }
+  else{document.getElementById("returnDepartureDateDiv").style.display = "flex";}
+}
 
 // ------------ PASSENGERS INPUTS FUNCTIONS ------------ //
 
@@ -246,6 +255,7 @@ console.log("petition: " + petition)
 // searchFlights(petition) ----> FETCH FUCTION
 
 })
+
 
 
 

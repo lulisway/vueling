@@ -17,6 +17,9 @@ body{
     background-color: #999797;
 }
 
+.select-direction{
+    padding-top: 3%;
+}
 .destiny{
     display: flex;
 }
@@ -37,10 +40,13 @@ h1,h2{
     box-shadow: 5px 5px 5px #000000b3;
 }
 
-#passengersQuantity {
+#passengersAndDirection {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
+
+
 .centro{
     display: flex;
     justify-content: center;
@@ -179,13 +185,12 @@ h1,h2{
     color: #ffffff;
 }
 
-<<<<<<< HEAD
+#date{
+    display: flex;
+    flex-direction: row;
+}
 /* .simple input{
 } */
-=======
-.simple input{
-}
->>>>>>> 02c44afddd94c7fcb6a18a9aff621ba70f8d3df2
 #flightInfo{
     display: flex;
     flex-direction: column;

@@ -33,15 +33,25 @@
            
             <div class="destiny">
                 <div class="dark-b">
-                    <label for="departureDate">Fecha de ida</label>
-                    <input type="date" name="departureDate" id="departureDate" class="redondeado">
+                    <div id="date">
+                        <label for="departureDate">Fecha de ida</label>
+                        <input type="date" name="departureDate" id="departureDate" class="redondeado">
 
-                    <label for="returnDepartureDate">Fecha de retorno</label>
-                    <input type="date" name="returnDepartureDate" id="returnDepartureDate" class="redondeado">
+                        <div id="returnDepartureDateDiv">
+                        <label for="returnDepartureDate">Fecha de retorno</label>
+                        <input type="date" name="returnDepartureDate" id="returnDepartureDate" class="redondeado">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="passengersQuantity">
+            <div id="passengersAndDirection">
             <button id="btn-modal" class="btn-modal" onclick="setPassengers()"> Pasajeros </button> 
+            <div class="select-direction">
+            <select name="select-direction" id="selectDir" onchange="functDir()">
+                <option value="departure">Sólo ida</option> 
+                <option value="departureReturn" selected>Ida y vuelta</option>
+              </select>
+            </div>
             <div id="selectedPassengers"></div>
             </div>
             <div>
