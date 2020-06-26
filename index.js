@@ -1,136 +1,104 @@
-"use strict"
+//"use strict"
 
-/* ----------- Global variables ----------- */
-/* ----------- (Initialization) ----------- */
+// import { writeHeapSnapshot } from "v8"
+
 
 let arrayPassengers = []
-let passengers = document.getElementById('passengersPax')
-let search = document.getElementById('searchForm')
-
-
-
-/* ----------- Handler Functions ----------- */
-/// --- PETICIÓN FETCH --- ///
-
-function searchFlights(petition){
-  fetch(petition)
-    .then(response => response.json())
-    .then(data => {
-      pintar(data)
-    })
-  }
-
-function pintar(data) {
-  let departureAirport = document.getElementById("labelDeparture")
-  let arrivalAirport = document.getElementById("labelArrival")
-  let departureDate = document.getElementById("labelDepartureDate")
-  let departureTime = document.getElementById("departureTime")
-  let arrivalTime = document.getElementById("arrivalTime")
-  let returnDepartureAirport = document.getElementById("labelReturnDA")
-  let returnArrivalAirport = document.getElementById("labelReturnAA")
-  let returnDate = document.getElementById("labelReturnDate")
-  let returnDepartureTime = document.getElementById("returnDepartureTime")
-  let returnArrivalTime = document.getElementById("returnArrivalTime")
-  departureAirport.innerHTML = data.departureAirport
-  arrivalAirport.innerHTML = data.arrivalAirport
-  departureDate.innerHTML = data.departureDate
-  departureTime.innerHTML = data.departureTime
-  arrivalTime.innerHTML = data.arrivalTime
-  returnDepartureAirport.innerHTML = data.returnDepartureAirport
-  returnArrivalAirport.innerHTML = data.returnArrivalAirport
-  returnDate.innerHTML = data.returnDate
-  returnDepartureTime.innerHTML = data.returnDepartureTime
-  returnArrivalTime.innerHTML = data.returnArrivalTime
+function writePassengers(arrayPassengers){
+  let i
+  let passengersUrl
+  let result = ""
+    for (i=0; i < arrayPassengers.length; i++){
+      passengersUrl = arrayPassengers[i].toString()
+      result += `/${passengersUrl}`
+      console.log(result)
+      
+    }
+    return result
+    
 }
 
-//---------Flight Direction----------
+let search = document.getElementById('searchForm')
+search.addEventListener('submit', (evt)=>{
 
-/* Ejemplo del objeto que recibiria por fetch
-let data = {
-  departureAirport: "MAD",
-  arrivalAirport: "LIN",
-  departureDate: "20-05-2020",
-  departureTime: "14:25",
-  arrivalTime: "17:40",
-  returnDepartureAirport: "LIN",
-  returnArrivalAirport: "MAD",
-  returnDate: "14-06-2020",
-  returnDepartureTime: "2:00",
-  returnArrivalTime: "5:30",
-  finalValue: 500
-}*/
+evt.preventDefault()
+
+// let origin = document.getElementById('departureAirport').value 
+// let destiny = document.getElementById('arrivalAirport').value
 
 
-// ------------ AIRPORTS INPUTS FUNCTIONS ------------ //
+let departureDate = getDepartureDate()
+let returnDepartureDate = getReturnDepartureDate()
+console.log(getDepartureDate())
+console.log(getReturnDepartureDate())
+
+let aditionalPassengers = writePassengers(arrayPassengers)
 
 
 
-// -------------- DATES INPUTS FUNCTIONS ------------- //
-
- /// ACORDARSE DE CONTARLES LA ALTERNATIVA CON LAS FECHAS A TODO EL GRUPO ///
 
 
- function getDepartureDate(){
-  let departureDate = document.getElementById('departureDate').value;
-  let departureYear = parseInt(departureDate.toString().substr(0,4));
-  let departureMonth = parseInt(departureDate.toString().substr(5,2));
-  let departureDay = parseInt(departureDate.toString().substr(8,2));
-  let departureDateObj = {
-                          DepartureYear : departureYear,
-                          DepartureMonth : departureMonth,
-                          DepartureDay : departureDay
-  }
-  return departureDate
-  //return departureDateObj
-};
 
-function getReturnDepartureDate(){
-  let returnDepartureDate= document.getElementById('returnDepartureDate').value;
-  let returnDepartureYear=parseInt(returnDepartureDate.toString().substr(0,4));
-  let returnDepartureMonth=parseInt(returnDepartureDate.toString().substr(5,2));
-  let returnDepartureDay=parseInt(returnDepartureDate.toString().substr(8,2));
-  let returnDepartureDateObj = {
-                                ReturnDepartureYear : returnDepartureYear,
-                                ReturnDepartureMonth : returnDepartureMonth,
-                                ReturnDepartureDay : returnDepartureDay
-  }
-  return returnDepartureDate
-  //return returnDepartureDateObj
-};
+
+//let returnDepartureDate = document.getElementById('returnDepartureDate').value
+
+
+let departureAirport= getDepartureAirport();
+// console.log(departureAirport);
+
+let arrivalAirport= getArrivalAirport();
+// console.log(arrivalAirport);
+
+// let petition = `http://localhost:8888/search/${departureAirport}/${arrivalAirport}/${departureDate.DepartureYear}/${departureDate.DepartureMonth}/${departureDate.DepartureDay}/${returnDepartureDate.ReturnDepartureYear}/${returnDepartureDate.ReturnDepartureMonth}/${returnDepartureDate.ReturnDepartureDay}/${arrayPassengers[0]}&p2=${arrayPassengers[1]}&p3=${arrayPassengers[2]}/${arrayPassengers[3]}/${arrayPassengers[4]}/${arrayPassengers[5]}/${arrayPassengers[6]}/${arrayPassengers[7]}/${arrayPassengers[8]}/${arrayPassengers[9]}`
+
+let petition = `http://localhost:8888/search/${departureAirport}/${arrivalAirport}/${departureDate}/${returnDepartureDate}${aditionalPassengers}`
+
+console.log("petition: " + petition)
+
+// searchFlights(petition)
+
+})
+
+
+
+let passengers = document.getElementById('passengersPax')
+let btnPassengers = document.getElementById('passengersPax').addEventListener('change', passengersPerAge)
+let labelAges = document.getElementById('passengersPax').addEventListener('change', LabelAges)
 
 function functDir(){
   if(document.getElementById('selectDir').value == "departure") {
     document.getElementById("returnDepartureDateDiv").style.display = "none";
     returnDepartureDate=null;
   }
-  else{document.getElementById("returnDepartureDateDiv").style.display = "flex";}
+  else{document.getElementById("returnDepartureDateDiv").style.display = "flex";
+  }
 }
-
-// ------------ PASSENGERS INPUTS FUNCTIONS ------------ //
 
 function LabelAges(){
   document.getElementById("label-ages").innerHTML = "Selecciona sus edades";
 }
 
 
+
 function passengersPerAge() {
 
   let passengersPax = passengers.value
-    deleteChilds()
+    //renderPassengersDivs(passengersPax)
+    borrarChilds()
     renderAgeOptions(passengersPax)
 
-  function deleteChilds () {
+
+  function borrarChilds () {
     let div = document.getElementById('passengersAge');
       while (div.firstChild) {
             div.removeChild(div.firstChild);
-      }
+  }
   }
 }
 
- 
 
 function renderAgeOptions(passengersPax){
-  // Funciones hijas -- Closures
+  // Función hija -- Closure
   function generatePassengersOptions(value, content){
     let newPassengerDiv = document.createElement('option') 
 
@@ -139,22 +107,7 @@ function renderAgeOptions(passengersPax){
     return newPassengerDiv
   }
 
-  function drawPassengers(x){
-    let passenger = document.getElementById(`passengersAge${x}`)
-    passenger.addEventListener('change', () =>{
-    
-    let newPassengerAge = document.createElement('p')
-    newPassengerAge.setAttribute("value", x)
-    newPassengerAge.setAttribute("id", x) 
-    newPassengerAge.text = `Pasajero n°${x+1}: ${passenger.value} años`
-    newPassengerAge.innerHTML = `Pasajero ${x+1}: ${passenger.value}`
-    document.getElementById('selectedPassengers').appendChild(newPassengerAge)
-    arrayPassengers.push(`${passenger.value}`)
-    // console.log("valor de cada pasajero: " + passenger.value)
-    // console.log("Array of pass: " + arrayPassengers)
-    })
-    }
-
+   
   let j = 0
   let x = 0
   
@@ -174,21 +127,86 @@ function renderAgeOptions(passengersPax){
           
         } 
   }
+  
+  //TO DO: faltaría: if bebé, no pintar 1, si no bebé de 0 a 23 meses. Recoger 1 como value
+  function drawPassengers(x){
 
+    var passenger = document.getElementById(`passengersAge${x}`)
+    passenger.addEventListener('change', () =>{
+    var newPassengerAge = document.createElement('p')
+    newPassengerAge.setAttribute("value", x)
+    newPassengerAge.setAttribute("id", x) 
+    newPassengerAge.text = `Pasajero n°${x+1}: ${passenger.value}`
+    newPassengerAge.innerHTML = `Pasajero nº ${x+1}: ${passenger.value} años`
+    document.getElementById('selectedPassengers').appendChild(newPassengerAge)
+    arrayPassengers.push(`${passenger.value}`)
+    // console.log("valor de cada pasajero: " + passenger.value)
+    // console.log("Array of pass: " + arrayPassengers)
+    })
+    }
+  }
+  
+//   function aditionalPassengers(arrayPassengers){
+//     let optionalPassengers = arrayPassengers.
+//   }
+
+//--funciona--//
+// function drawPassengers(x){
+
+    
+    
+//   let passenger = document.getElementById(`passengersAge${x}`)
+//   passenger.addEventListener('change', () =>{
+//   let newPassengerAge = document.createElement('p')
+//   newPassengerAge.setAttribute("value", x)
+//   newPassengerAge.setAttribute("id", x) 
+//   newPassengerAge.text = `Pasajero n°${x+1}: ${passenger.value}`
+//   newPassengerAge.innerHTML = `Pasajero nº ${x+1}: ${passenger.value} años`
+//   document.getElementById('selectedPassengers').appendChild(newPassengerAge)
+//   arrayPassengers.push(`${passenger.value}`)
+//   console.log("valor de cada pasajero: " + passenger.value)
+//   console.log("Array of pass: " + arrayPassengers)
+//   })
+//   }
+
+
+     
+
+      
+
+  
+  
+
+
+
+
+// ---- VENTANA MODAL ---- //
+ function setPassengers() {
+    location.href = '#modal';
+    var x = document.getElementById("0");
+  if (x!==null) {
+    let passengersPreviewDiv = document.getElementById("passengersPreview");
+    passengersPreviewDiv.style.display = "none";
+   document.getElementById("selectedPassengers").innerHTML="";
+    borrarChilds() 
+  } 
+
+/*       var valor = document.getElementById("selectedPassengers");
+    alert(valor.innerHTML); //Muestra "soy un span"
+    alert(valor.outerHTML); //Muestra "<span id="span">soy un span</span>" */
+  
     return j
 }
 
-// ----------- VENTANA MODAL ----------- //
- function setPassengers() {
-    location.href = '#modal';
-  }
-
  function closeModal(){
   location.href = '#';
+  let passengersPreviewDiv = document.getElementById("passengersPreview");
+  passengersPreviewDiv.style.display = "block";
+
  };
 
  function callResponse(){
-  let x = document.getElementById("response");
+  var x = document.getElementById("response");
   if (x.style.display === "none") {
     x.style.display = "flex";
     location.href = '#response';
@@ -197,6 +215,7 @@ function renderAgeOptions(passengersPax){
   }
  }
  
+
  function closeModalVisible(){
     document.getElementById("close").innerHTML = "ACEPTAR";
  };
@@ -204,72 +223,61 @@ function renderAgeOptions(passengersPax){
 
 
 
-/* ----------- Event Listeners ----------- */
-/* -------------- (Binding) -------------- */
-
-document.getElementById('passengersPax').addEventListener('change', passengersPerAge)
-document.getElementById('passengersPax').addEventListener('change', LabelAges)
-
-search.addEventListener('submit', (evt)=>{
-
-evt.preventDefault()
 
 
-// --- AIRPORTS VALUES --- //
-
-// let departureAirport = 
-// let arrivalAirport = 
+ // ---- FECHAS IDA Y VUELTA ---- //
+ /// ACORDARSE DE CONTARLES LA ALTERNATIVA CON LAS FECHAS A TODO EL GRUPO ///
 
 
-// --- DATES VALUES --- //
+function getDepartureDate(){
+  let departureDate = document.getElementById('departureDate').value;
+  let departureYear = parseInt(departureDate.toString().substr(0,4));
+  let departureMonth = parseInt(departureDate.toString().substr(5,2));
+  let departureDay = parseInt(departureDate.toString().substr(8,2));
+  let departureDateObj = {
+                          DepartureYear : departureYear,
+                          DepartureMonth : departureMonth,
+                          DepartureDay : departureDay
+                        }
+  return departureDate
+  //return departureDateObj
 
-let departureDate = getDepartureDate()
-let returnDepartureDate = getReturnDepartureDate()
+};
 
 
-// --- PASSENGERS VALUES --- //
 
 
-let aditionalPassengers = writePassengers(arrayPassengers)
 
-function writePassengers(arrayPassengers){
-  let i
-  let passengersUrl
-  let result = ""
-    for (i=0; i < arrayPassengers.length; i++){
-      passengersUrl = arrayPassengers[i].toString()
-      result += `/${passengersUrl}`
-      //console.log(result)
-    }
-    return result   
+function getReturnDepartureDate(){
+  let returnDepartureDate= document.getElementById('returnDepartureDate').value;
+  let returnDepartureYear=parseInt(returnDepartureDate.toString().substr(0,4));
+  let returnDepartureMonth=parseInt(returnDepartureDate.toString().substr(5,2));
+  let returnDepartureDay=parseInt(returnDepartureDate.toString().substr(8,2));
+  let returnDepartureDateObj = {
+                                ReturnDepartureYear : returnDepartureYear,
+                                ReturnDepartureMonth : returnDepartureMonth,
+                                ReturnDepartureDay : returnDepartureDay
+                              }
+  //return returnDepartureDateObj
+  return returnDepartureDate
+  
+};
+
+/// SELECT ORIGEN Y DESTINO ///
+//--- --- origen --- ---- //
+function getDepartureAirport(){
+  let returnDepartureAirport= document.getElementById('departureOptions').value;
+console.log(returnDepartureAirport)
+
+  return returnDepartureAirport;
 }
 
-// --- URL PETITION --- //
+function getArrivalAirport(){
+  let returnArrivalAirport= document.getElementById('arrivalOptions').value;
+  console.log(returnArrivalAirport)
+  return returnArrivalAirport;
 
-// let petition = `http://localhost:8888/search/${departureAirport}/${arrivalAirport}/${departureDate.DepartureYear}/${departureDate.DepartureMonth}/${departureDate.DepartureDay}/${returnDepartureDate.ReturnDepartureYear}/${returnDepartureDate.ReturnDepartureMonth}/${returnDepartureDate.ReturnDepartureDay}/${arrayPassengers[0]}&p2=${arrayPassengers[1]}&p3=${arrayPassengers[2]}/${arrayPassengers[3]}/${arrayPassengers[4]}/${arrayPassengers[5]}/${arrayPassengers[6]}/${arrayPassengers[7]}/${arrayPassengers[8]}/${arrayPassengers[9]}`
-
-let petition = `http://localhost:8888/search/${departureAirport}/${arrivalAirport}/${departureDate}/${returnDepartureDate}${aditionalPassengers}`
-
-console.log("petition: " + petition)
-
-// searchFlights(petition) ----> FETCH FUCTION
-
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+  console.log(getArrivalAirport());
 
 

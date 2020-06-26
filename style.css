@@ -18,7 +18,7 @@ body{
 }
 
 .select-direction{
-    padding-top: 3%;
+    margin-top: 1.5%;
 }
 .destiny{
     display: flex;
@@ -46,6 +46,12 @@ h1,h2{
     justify-content: space-between;
 }
 
+#departureDateDiv{
+    display: flex;
+    flex-direction: row;
+    min-width: 300px;
+    }
+}
 
 .centro{
     display: flex;
@@ -107,7 +113,7 @@ h1,h2{
     background-color: #727272;
     color: #ffffff;
     padding: 2% 15px;
-    min-width: 545px;
+    min-width: 563px;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     }
@@ -130,7 +136,6 @@ h1,h2{
     box-shadow: 5px 5px 5px #000000b3;
 }
 
-
 .light{
     color: #595959;
     background-color: #ffffff;
@@ -146,12 +151,11 @@ h1,h2{
     border: none;
     border-radius: 3px;
     margin-bottom: 2%;
-
 }
 
 #btn-search-modal{
     position: absolute;
-    top: 45px;
+    top: 38px;
     right: 30px;
 }
 
@@ -189,8 +193,19 @@ h1,h2{
     display: flex;
     flex-direction: row;
 }
-/* .simple input{
-} */
+
+#departureDateLabel {
+	flex-wrap: nowrap;
+	display: flex;
+	align-items: center;
+	padding-right: 1.5%;
+}
+
+#returnDepartureDateDiv{
+    display: flex;
+    align-items: center;
+}
+
 #flightInfo{
     display: flex;
     flex-direction: column;
@@ -222,6 +237,23 @@ h1,h2{
     background-color: gold;
 }
 
+#btn-erase-modal{
+    margin-top: 10%;
+}
+
+#passengersPreview{
+    display: none;
+    background-color: #727272;
+    color: #ffffff;
+    padding: 15px;
+    padding-top: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    margin-top: 2%;
+    }
+
 /*-----------------modal--------------*/
 
 .overlay {
@@ -242,6 +274,7 @@ h1,h2{
 
 #modalBody{
     width: 25%;
+    min-width: 345px;
     padding: 2%;
     border-radius: 15px;
     box-shadow: 0 0 5px #CCC;
@@ -261,3 +294,98 @@ h1,h2{
     text-decoration: none;
     color: #000000;
 }
+
+/*--------responsive-----------*/
+@media (max-width: 800px) {
+    #response{
+        flex-direction: column;
+    }
+     #priceInfo{
+        width: min-content;
+        margin-left: 1%;
+    } 
+    #flightInfo {
+        width: min-content;
+    }
+}
+ @media (max-width: 600px) {
+
+    .header{
+        background-image: url(images/avion.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 200px;
+        width: 500px;
+    }    
+
+    .title{
+        min-width: 140px;
+    }
+
+    .content{
+        width: 500px;
+    }
+
+    .destiny{
+        flex-direction: column;
+        width: 500px;
+    }
+
+    .date{
+        display: flex;
+        flex-direction: column;
+        width: 500px;   
+    }
+    #departureDateDiv{
+        min-width: 0px;
+        }
+
+    .dark-b{
+        min-width: 0;
+    }
+
+    #submitDiv{
+        margin-left: 1%;
+    }
+
+    #passengersAndDirection {
+        margin-left: 1%;
+        margin-right: 1%;
+        flex-direction: column;
+    }
+    #date{
+        flex-direction: column;
+    }
+    #selectDir{
+        margin-bottom: 1%;
+    }
+    #modalBody {
+        width: 50%;
+        min-height: 80px;
+    }
+    #btn-search-modal {
+        position: absolute;
+        top: 38px;
+        right: 10px;
+    }
+}
+/*------------584 a 800--------*/
+/* menos de 584*/
+@media (max-width: 585px) {
+#response{
+    flex-direction: column;
+}
+.dark{
+    display: flex;
+    flex-direction: column;
+}
+.simple {
+	display: flex;
+	flex-direction: column;
+}
+.compound {
+	display: flex;
+	flex-direction: column;
+}
+}
+

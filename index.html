@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico"/>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Air Omega</title>
 </head>
 
 <body>
     <div class="header">
     <div class="title">
-        <h1>Buscador <br></h1>
+        <h1>Buscator <br></h1>
         <h2>El vuelo mas barato!</h2>
     </div>
 </div>
@@ -21,12 +21,47 @@
         <form action="" method="GET" id="searchForm" class="search-form">
             <div class="destiny">
                 <div class="dark">
-                <label for="departureAirport">Punto de origen</label>
-                <input type="text" id="departureAirport" name="departureAirport" class="search" placeholder="Ciudad o IATA">
-                </div>
+                        <label for="departureAirport" id="departureAirport">Origen:</label>
+                        <!-- <select class="search" name="departureOptions"id="departureOptions"> -->
+                        <select name="departureOptions"id="departureOptions">
+                            <option value="depOptions">--seleccione su aeropuerto--</option>
+                            <optgroup label="Europe">
+                                <option value="MAD"  id="MAD">Madrid, España, MAD</option>
+                                <option value="BCN" id="BCN">Barcelona, España, BCN</option>
+                                <option value="BIO" id="BIO">Bilbao, España, BIO</option>
+                            </optgroup>
+                            <optgroup label="Asia">
+                                <option value="HND" id="NHD">Tokio, Japan, HND</option>
+                                <option value="NRT" id="NRT">Narita, Japan, NRT</option>
+                                <option value="NGO" id="NGO">Chubu, Japan, NGO</option>
+                            </optgroup>
+                            <optgroup label="America">
+                                <option value="LAX" id="LAX">Los Angeles, America, LAX</option>
+                                <option value="DFW" id="DFW">Dalas, America, DFW</option>
+                                <option value="EZE" id="EZE">Buenos Aires, America, EZE</option>
+                            </optgroup>
+                        </select>
+                       </div>
                 <div class="light">
-                <label for="arrivalAirport">Destino</label>
-                <input type="text" id="arrivalAirport" name="arrivalAirport" class="search" placeholder="Ciudad o IATA">
+                    <label for="arrivalAirport">Destino:</label>
+                    <select  name="arrivalOptions"id="arrivalOptions">
+                       <option value="arrOptions">--seleccione su aeropuerto--</option>
+                       <optgroup label="Europe">
+                           <option value="MAD">Madrid, España, MAD</option>
+                           <option value="BCN">Barcelona, España, BCN</option>
+                           <option value="BIO">Bilbao, España, BIO</option>
+                       </optgroup>
+                       <optgroup label="Asia">
+                           <option value="HND">Tokio, Japón, HND</option>
+                           <option value="NRT">Narita, Japón, NRT</option>
+                           <option value="NGO">Chubu, Japón, NGO</option>
+                       </optgroup>
+                       <optgroup label="America">
+                           <option value="LAX">Los Angeles, América, LAX</option>
+                           <option value="DFW">Dalas, América, DFW</option>
+                           <option value="EZE">Buenos Aires, América, EZE</option>
+                       </optgroup>
+                   </select>
                 </div>
             </div>
       
@@ -34,27 +69,32 @@
             <div class="destiny">
                 <div class="dark-b">
                     <div id="date">
-                        <label for="departureDate">Fecha de ida</label>
+                        <div id="departureDateDiv">
+                        <label for="departureDate" id="departureDateLabel">Fecha de ida</label>
                         <input type="date" name="departureDate" id="departureDate" class="redondeado">
+                        </div>
 
                         <div id="returnDepartureDateDiv">
-                        <label for="returnDepartureDate">Fecha de retorno</label>
+                        <label for="returnDepartureDate" id="returnDepartureDateLabel">Fecha de retorno</label>
                         <input type="date" name="returnDepartureDate" id="returnDepartureDate" class="redondeado">
                         </div>
                     </div>
                 </div>
             </div>
+
             <div id="passengersAndDirection">
-            <button id="btn-modal" class="btn-modal" onclick="setPassengers()"> Pasajeros </button> 
-            <div class="select-direction">
-            <select name="select-direction" id="selectDir" onchange="functDir()">
-                <option value="departure">Sólo ida</option> 
-                <option value="departureReturn" selected>Ida y vuelta</option>
-              </select>
+                <button id="btn-modal" class="btn-modal" onclick="setPassengers()"> Pasajeros </button> 
+                <div id="passengersPreview">
+                <div id="selectedPassengers"> </div>              
+                 </div>
+                <div class="select-direction">
+                    <select name="select-direction" id="selectDir" onchange="functDir()">
+                        <option value="departure">Sólo ida</option> 
+                        <option value="departureReturn" selected>Ida y vuelta</option>
+                    </select>
+                </div>
             </div>
-            <div id="selectedPassengers"></div>
-            </div>
-            <div>
+            <div id="submitDiv">
                 <input type="submit" id="btn-search" onclick="callResponse()" value="Buscar">
             </div>
         </form>        
@@ -142,13 +182,13 @@
             <div class='modalContent'>
                 <div>
                 <label for="passengersPax">Número de pasajeros (1-10):<br/></label>
-                <input type="number" id="passengersPax" name="passengersPax" min="1" max="10">
+                <input type="number" id="passengersPax" name="passengersPax" min="0" max="10">
             </div>
             <label for="passengersAge" id="label-ages"></label>
             <div id="passengersAge" class="centro columna">
             </div>
             <div>
-                <input type="submit" onclick="closeModal()" class="btn-modal" value="buscar vuelo" id="btn-search-modal">
+                <input type="submit" onclick="closeModal()" class="btn-modal" value="Aceptar" id="btn-search-modal">
             </div>
         </div>
     </div>
