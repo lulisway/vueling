@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
     <link rel="shortcut icon" type="image/png" href="images/favicon.ico"/>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
     <title>Air Omega</title>
 </head>
 
@@ -50,6 +50,7 @@
                            <option value="MAD">Madrid, España, MAD</option>
                            <option value="BCN">Barcelona, España, BCN</option>
                            <option value="BIO">Bilbao, España, BIO</option>
+                           <option value="CDG">París, Francia, CDG</option>
                        </optgroup>
                        <optgroup label="Asia">
                            <option value="HND">Tokio, Japón, HND</option>
@@ -95,7 +96,7 @@
                 </div>
             </div>
             <div id="submitDiv">
-                <input type="submit" id="btn-search" onclick="callResponse()" value="Buscar">
+                <input type="submit" id="btn-search" value="Buscar">
             </div>
         </form>        
     </div>
@@ -105,12 +106,12 @@
                 <div class="dark">
                 <div class="simple">
                     <div>        
-                        <label for="LabelDeparture">LabelDeparture <br></label>
-                        <input type="text" id="LabelDeparture" name="LabelDeparture" placeholder="DepartureAirport.value"> 
+                        <label for="labelDeparture">LabelDeparture <br></label>
+                        <p id="labelDeparture"></p>
                     </div>
                     <div>
-                        <label for="LabelArrival">LabelArrival <br></label>
-                        <input type="text" id="LabelArrival" name="LabelArrival" placeholder="arrivalAirport.value">
+                        <label for="labelArrival">LabelArrival <br></label>
+                        <p id="labelArrival"></p>
                     </div>
                 </div>
             </div>

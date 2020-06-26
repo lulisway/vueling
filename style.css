@@ -51,7 +51,6 @@ h1,h2{
     flex-direction: row;
     min-width: 300px;
     }
-}
 
 .centro{
     display: flex;
@@ -173,7 +172,7 @@ h1,h2{
 }
 
 .response{
-    display: none;
+    display: flex;
 }
 
 .simple{
