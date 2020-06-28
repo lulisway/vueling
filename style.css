@@ -64,8 +64,48 @@ h1,h2{
 .redondeado{
     border-radius: 5px;
     margin: 5px;
+<<<<<<< HEAD
+=======
 }
+.search1 {
 
+    background: #ffef7f;
+    
+>>>>>>> Nora
+}
+ .search2 {
+
+    background: #ffef7f;
+    
+}
+#departureOptions {
+    display: none;
+    max-height: 16em;
+    width: 133px;
+    overflow-y: auto;
+    z-index: 1;
+    position: absolute;
+    margin-left: 58px;
+    background: #333;
+    color: white;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+#arrivalOptions{
+    display: none;
+    max-height: 16em;
+    width: 133px;
+    overflow-y: auto;
+    z-index: 1;
+    position: absolute;
+    margin-left: 64px;
+    background: #333;
+    color: white;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
 .columna{
     display: flex;
     flex-direction: column;
@@ -172,7 +212,11 @@ h1,h2{
 }
 
 .response{
+<<<<<<< HEAD
     display: flex;
+=======
+    display: none;
+>>>>>>> Nora
 }
 
 .simple{
