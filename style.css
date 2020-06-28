@@ -1,18 +1,427 @@
-body{
-    background-image: url(images/cielo_azul_nubes_naturaleza_2144x1424.jpg);
+*{
+    font-family: Helvetica, arial, sans-serif;
 }
+body{
+    background-color: #D6D6D6;
+}
+.header{
+    background-image: url(images/avion.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 400px;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    background-color: #999797;
+}
+
+.select-direction{
+    margin-top: 1.5%;
+}
+.destiny{
+    display: flex;
+}
+
+.search{
+    border-radius: 3px;
+}
+h1,h2{
+    text-align: end;
+}
+
+.title{
+    max-width: 25%;
+    background-color: #F5E460;
+    margin-left: 10%;
+    padding: 1%;
+    border-radius: 3px;
+    box-shadow: 5px 5px 5px #000000b3;
+}
+
+#passengersAndDirection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#departureDateDiv{
+    display: flex;
+    flex-direction: row;
+    min-width: 300px;
+    }
 
 .centro{
     display: flex;
     justify-content: center;
 }
 
+.response{
+    display: flex;
+}
 
 .redondeado{
     border-radius: 5px;
+    margin: 5px;
 }
+.search1 {
 
+    background: #ffef7f;
+    
+}
+ .search2 {
+
+    background: #ffef7f;
+    
+}
+#departureOptions {
+    display: none;
+    max-height: 16em;
+    width: 133px;
+    overflow-y: auto;
+    z-index: 1;
+    position: absolute;
+    margin-left: 58px;
+    background: #333;
+    color: white;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+#arrivalOptions{
+    display: none;
+    max-height: 16em;
+    width: 133px;
+    overflow-y: auto;
+    z-index: 1;
+    position: absolute;
+    margin-left: 64px;
+    background: #333;
+    color: white;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
 .columna{
     display: flex;
     flex-direction: column;
 }
+
+.price{
+    display: flex;
+    flex-direction: column;
+}
+
+.departure{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    flex-wrap: wrap;
+}
+
+.pair{
+    max-width: 50%;
+}
+
+.response{
+    display: flex;
+    justify-content: center;
+}
+.return{
+    display: flex;
+    justify-content: center;
+}
+
+.time-box{
+    background-color: gold;
+    width: 80px;
+}
+
+.dark{
+    background-color: #595959;
+    color: #ffffff;
+    padding: 2% 15px;
+    border-top-left-radius:3px
+    }
+
+.dark-b{
+    background-color: #727272;
+    color: #ffffff;
+    padding: 2% 15px;
+    min-width: 563px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    }
+
+.response .dark-b{
+    box-shadow: 5px 5px 5px #000000b3;
+}
+
+.response .dark:first-of-type{
+    border-top-right-radius: 3px;
+}
+.response .dark:nth-of-type(2){
+    border-top-left-radius: 0px;
+}
+
+.response .dark-b:nth-of-type(3){
+    border-bottom-left-radius:0px;
+}
+.response .dark {
+    box-shadow: 5px 5px 5px #000000b3;
+}
+
+.light{
+    color: #595959;
+    background-color: #ffffff;
+    padding: 2% 15px;
+    border-top-right-radius: 3px;
+    }
+              
+             
+#btn-search{
+    background-color: #E7C130;
+    width: 90px;
+    height:30px;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 2%;
+}
+
+#btn-search-modal{
+    position: absolute;
+    top: 38px;
+    right: 30px;
+}
+
+#departureDate{
+    margin-right: 10%;
+}
+.btn-modal{
+    background-color: #595959;
+    color: #ffffff;
+    width: 90px;
+    height:30px;
+    border: none;
+    margin: 2% 0;
+    border-radius: 3px;
+}
+
+.response{
+    display: none;
+}
+
+.simple{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5%;
+    color: #ffffff;
+}
+.compound{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5%;
+    color: #ffffff;
+}
+
+#date{
+    display: flex;
+    flex-direction: row;
+}
+
+#departureDateLabel {
+	flex-wrap: nowrap;
+	display: flex;
+	align-items: center;
+	padding-right: 1.5%;
+}
+
+#returnDepartureDateDiv{
+    display: flex;
+    align-items: center;
+}
+
+#flightInfo{
+    display: flex;
+    flex-direction: column;
+    padding: 1%;
+}
+#priceInfo{
+    margin-top: 1%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: #595959;
+    background-color: #ffffff;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    height: min-content;
+    box-shadow: 5px 5px 5px #000000b3;
+}
+
+#price{
+    background-color: gold;
+}
+
+#pricePax{
+    margin-bottom: 10%;
+    background-color: gold;
+}
+
+#btn-erase-modal{
+    margin-top: 10%;
+}
+
+#passengersPreview{
+    display: none;
+    background-color: #727272;
+    color: #ffffff;
+    padding: 15px;
+    padding-top: 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    margin-top: 2%;
+    }
+
+/*-----------------modal--------------*/
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+#modalBody{
+    width: 25%;
+    min-width: 345px;
+    padding: 2%;
+    border-radius: 15px;
+    box-shadow: 0 0 5px #CCC;
+    background-color: gold;
+    opacity: 90%;
+    position: relative;
+    transition: all 5s ease-in-out;
+    margin:7% auto;    
+}
+
+#close{
+    position: absolute;
+    top:20px;
+    right: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000000;
+}
+
+/*--------responsive-----------*/
+@media (max-width: 800px) {
+    #response{
+        flex-direction: column;
+    }
+     #priceInfo{
+        width: min-content;
+        margin-left: 1%;
+    } 
+    #flightInfo {
+        width: min-content;
+    }
+}
+ @media (max-width: 600px) {
+
+    .header{
+        background-image: url(images/avion.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 200px;
+        width: 500px;
+    }    
+
+    .title{
+        min-width: 140px;
+    }
+
+    .content{
+        width: 500px;
+    }
+
+    .destiny{
+        flex-direction: column;
+        width: 500px;
+    }
+
+    .date{
+        display: flex;
+        flex-direction: column;
+        width: 500px;   
+    }
+    #departureDateDiv{
+        min-width: 0px;
+        }
+
+    .dark-b{
+        min-width: 0;
+    }
+
+    #submitDiv{
+        margin-left: 1%;
+    }
+
+    #passengersAndDirection {
+        margin-left: 1%;
+        margin-right: 1%;
+        flex-direction: column;
+    }
+    #date{
+        flex-direction: column;
+    }
+    #selectDir{
+        margin-bottom: 1%;
+    }
+    #modalBody {
+        width: 50%;
+        min-height: 80px;
+    }
+    #btn-search-modal {
+        position: absolute;
+        top: 38px;
+        right: 10px;
+    }
+}
+/*------------584 a 800--------*/
+/* menos de 584*/
+@media (max-width: 585px) {
+#response{
+    flex-direction: column;
+}
+.dark{
+    display: flex;
+    flex-direction: column;
+}
+.simple {
+	display: flex;
+	flex-direction: column;
+}
+.compound {
+	display: flex;
+	flex-direction: column;
+}
+}
+

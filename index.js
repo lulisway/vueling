@@ -1,151 +1,393 @@
-//if mayor de 10 pax redirect a un html con info de la compañías para precios grupo
-//bebé problemas: bebé 1, resto edad, bebé 0
-//pasar fechas al mismo formato que recoger que del html recojamos eso
-//dar todos los resultados del buscador
-// let passengers = document.getElementById('passengersPax')
-// let btnPassengers = document.getElementById('btn').addEventListener('click', passengersPerAge)
-// function passengersPerAge() {
-//     let passengersPax = passengers.value
-//     renderPassengersDivs(passengersPax)
+//"use strict"
+
+// import { writeHeapSnapshot } from "v8"
+
+
+let arrayPassengers = []
+function writePassengers(arrayPassengers){
+  let i
+  let passengersUrl
+  let result = ""
+    for (i=0; i < arrayPassengers.length; i++){
+      passengersUrl = arrayPassengers[i].toString()
+      result += `/${passengersUrl}`
+      console.log(result)
+      
+    }
+    return result 
+}
+
+let search = document.getElementById('searchForm')
+search.addEventListener('submit', (evt)=>{
+
+evt.preventDefault()
+//funcion ventana de espera style.display=block
+
+let departureAirport = document.getElementById('departureAirport').value
+let arrivalAirport = document.getElementById('arrivalAirport').value
+
+let departureDate = getDepartureDate()
+let returnDepartureDate = getReturnDepartureDate()
+console.log(getDepartureDate())
+console.log(getReturnDepartureDate())
+
+let aditionalPassengers = writePassengers(arrayPassengers)
+function writePassengers(arrayPassengers){
+  let i
+  let passengersUrl
+  let result = ""
+    for (i=0; i < arrayPassengers.length - 1; i++){
+      result += `${arrayPassengers[i].toString()}-`
+      console.log(result)
+    }
+    result += `${arrayPassengers[i].toString()}`
+    return result   
+}
+
+
+//let returnDepartureDate = document.getElementById('returnDepartureDate').value
+
+
+// let departureAirport= getDepartureAirport();
+// console.log(departureAirport);
+
+// let arrivalAirport= getArrivalAirport();
+// console.log(arrivalAirport);
+
+let petition = `http://localhost:8888/search/D/${departureAirport}/A/${arrivalAirport}/DD/${departureDate}/AD/${returnDepartureDate}/PA/${aditionalPassengers}`
+
+console.log("petition: " + petition)
+
+searchFlights(petition)
+
+})
+
+
+function searchFlights(petition){
+  fetch(petition, { method : 'GET'})
+    .then(response => response.json())
+    .then(data => {
+      if (data.msg){
+      //renderNotFound(data.msg)
+      // //funcion ventana de espera style.display=none
+      alert(data.msg)
+      console.log(data.msg)
+      }
+      else{
+      console.log("La data que llega a front: ", data)
+      // //funcion ventana de espera style.display=none
+
+      renderResult(data)
+    }
+    })
+  }
+
+// ------------ RENDER VIEW FUNCTIONS ------------ //
+
+// const renderNotFound = (msg) => {
+//   document.getElementById('labelDeparture').innerHTML = msg
 // }
-// function renderPassengersDivs(passengersPax){
-//     let quantity = passengersPax
-//     let i = 0
-//     for(i = 0; i < quantity; i++) {
-//             console.log("iteraciones: " + i)
-//             let newDiv = document.createElement('div')
-//             newDiv.innerHTML = `<input type="number" id="passengerAge${i}" name="passengerAge"min="0" max="100">`
-//             document.getElementById('passengersAge').appendChild(newDiv)
-//     }
-//     return i;
-// };
+function renderResult(data) {
+  document.getElementById('response').style.display = "flex"
+  let departureAirport = document.getElementById("labelDeparture")
+  let arrivalAirport = document.getElementById("labelArrival")
+  let departureDate = document.getElementById("labelDepartureDate")
+  let departureTime = document.getElementById("departureTime")
+  let arrivalTime = document.getElementById("arrivalTime")
+  let returnDepartureAirport = document.getElementById("labelReturnDA")
+  let returnArrivalAirport = document.getElementById("labelReturnAA")
+  let returnDate = document.getElementById("labelReturnDate")
+  let returnDepartureTime = document.getElementById("returnDepartureTime")
+  let returnArrivalTime = document.getElementById("returnArrivalTime")
+  departureAirport.innerHTML = data.departureAirport
+  arrivalAirport.innerHTML = data.arrivalAirport
+  departureDate.innerHTML = data.departureDate
+  departureTime.innerHTML = data.departureTime
+  arrivalTime.innerHTML = data.arrivalTime
+  returnDepartureAirport.innerHTML = data.returnDepartureAirport
+  returnArrivalAirport.innerHTML = data.returnArrivalAirport
+  returnDate.innerHTML = data.returnDate
+  returnDepartureTime.innerHTML = data.returnDepartureTime
+  returnArrivalTime.innerHTML = data.returnArrivalTime
+  
+  // funcion ventana resultados = style.display = block
+}
 
+
+
+function LabelAges(){
+  document.getElementById("label-ages").innerHTML = "Selecciona sus edades";
+}
+
+function callResponse(){
+  var x = document.getElementById("response");
+  if (x.style.display === "none") {
+    x.style.display = "flex";
+    location.href = '#response';
+  } else {
+    x.style.display = "none";
+  }
+ }
+
+
+// ------------ AIRPORTS INPUTS FUNCTIONS ------------ //
 /// SELECT ORIGEN Y DESTINO ///
-const endpoint = 'https://gist.github.com/tdreyno/4278655'
+
+//--- --- origen --- ---- //
+function getDepartureAirport(){
+  let returnDepartureAirport= document.getElementById("departureOptions").addEventListener('click', (e) => {
+    let option = e.target.value
+    search1.value= option
+    let text = e.target.textContent
+    depOptions.placeholder = text
+    console.log(text)
+    document.getElementById("departureOptions").style.display = "none";
+    })
+  return returnDepartureAirport;
+}
+
+function getArrivalAirport(){
+  let returnArrivalAirport = document.getElementById("arrivalOptions").addEventListener('click', (e) => {
+    let option = e.target.value
+    search2.value = option
+    let text = e.target.text
+    arrOptions.placeholder = text
+    console.log(text)
+    document.getElementById("arrivalOptions").style.display = "none";
+  })
+  return returnArrivalAirport;
+}
+  console.log(getArrivalAirport());
+  console.log(getDepartureAirport());
+
+// -------------- DATES INPUTS FUNCTIONS ------------- //
+
+function getDepartureDate(){
+  let departureDate = document.getElementById('departureDate').value;
+    return departureDate
+};
+
+function getReturnDepartureDate(){
+  if (document.getElementById('selectDir').value == "departure"){
+    let returnDepartureDate = null;
+    return returnDepartureDate
+  }
+  else {
+  let returnDepartureDate= document.getElementById('returnDepartureDate').value;
+    return returnDepartureDate
+  }
+  
+};
+
+/// SELECT DEPARTURE & ARRIVAL ///
 const cities = [];
+const search1 = document.querySelector("#departureAirport");
+const depOptions = document.querySelector('#departureOptions');
+const search2 = document.querySelector('#arrivalAirport');
+const arrOptions = document.querySelector('#arrivalOptions');
 
-console.log(cities);
-
-fetch(endpoint,{'Access-Control-Allow-Origin':'*'})
-    .then(blob => blob.json())
-    .then(data => cities.push(...data));
+// -- DEPARTURE -- //
+fetch('./airport.json')
+  .then(data => data.json())
+  .then(data => {
+    cities.push(...data)
+  });
 
 function findMatches(wordToMatch, cities) {
-    return cities.filter(place => {
-        const regex = new RegExp(wordToMatch, 'gi');
-        return place.city.match(regex) ||
-            place.code.match(regex);
-    });
+  wordToMatch = wordToMatch.split(",");
+  return cities.filter(place => {
+    if (wordToMatch.length === 1) {
+      const regex = new RegExp(wordToMatch[0], 'gi');
+      return (place.city.match(regex) ||
+        place.iata.match(regex));
+    } else {
+      const regex0 = new RegExp(wordToMatch[0], 'gi');
+      const regex1 = new RegExp(wordToMatch[1].substr(1, wordToMatch[1].length), 'gi');
+      return (place.city.match(regex0) &&
+        place.iata.match(regex1));
+    }
+  });
 }
 
 function displayMatches(e) {
-    const matchedArray = findMatches(e.target.value, cities);
-    const html = matchedArray.map(place => {
-        const regex = new RegExp(e.target.value, 'gi');
-        const cityName = place.city.replace(regex,
-            `<span class=hl>${e.target.value}</span>`)
-        const codeName = place.code.replace(regex,
-            `<span class=hl>${e.target.value}</span>`)
-        return `
-            <li>
-                <span class="name">${cityName}, ${codeName}</span>
-            </li>
-        `
-    }).join('');
-    suggestions.innerHTML = html;
+  console.log(e.target.value);
+  const html = findMatches(e.target.value, cities).map(place => {
+    if (place.iata !== "" || place.iata !== null || place.iata !== undefined) {
+      return `
+                    <option value="${place.iata}"id="${place.iata}" >${place.city}, ${place.iata}</option>
+            `
+    } console.log("lo que devuelve displayMatches: ", displayMatches(e))
+  }).join('');
+  depOptions.style.display = "block";
+  depOptions.innerHTML = html;
 }
 
-const search = document.querySelector('.search');
-const suggestions = document.querySelector('.suggestions');
+search1.addEventListener('keyup', (e) => displayMatches(e));
+console.log(search1)
+// -- ARRIVAL -- //
+const cities2 = [];
+// console.log(cities2);
+fetch('./airport.json')
+  .then(data => data.json())
+  .then(data => {
+    cities2.push(...data)
+  });
 
-search.addEventListener('change', displayMatches);
-search.addEventListener('keyup', displayMatches);
+function findMatches2(wordToMatch, cities2) {
+  wordToMatch = wordToMatch.split(",");
+  return cities2.filter(place => {
+    if (wordToMatch.length === 1) {
+      const regex = new RegExp(wordToMatch[0], 'gi');
+      return (place.city.match(regex) ||
+        place.iata.match(regex));
+    } else {
+      const regex0 = new RegExp(wordToMatch[0], 'gi');
+      const regex1 = new RegExp(wordToMatch[1].substr(1, wordToMatch[1].length), 'gi');
+      return (place.city.match(regex0) &&
+        place.iata.match(regex1));
+    }
+  });
+}
 
+function displayMatches2(e) {
+  const html2 = findMatches2(e.target.value, cities).map(place => {
+    return `<option value="${place.iata}" id="${place.city}">${place.city}, ${place.iata}</option>
+            `
+  }).join('');
+  arrOptions.style.display = "block";
+  arrOptions.innerHTML = html2;
+}
+search2.addEventListener('keyup', (e) => displayMatches2(e));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const endpoint= 'https://raw.githubusercontent.com/jbrooksuk/JSON-Airports/master/airports.json';
-// //const promise = fetch(endpoint);
-// //console.log(promise);
-
-// //fetch(endpoint).then(blob => console.log(blob));
-
-
-
-//     const cities = [];
-//     fetch(endpoint)
-//         .then(response => response.json())
-//         .then(data => cities.push(...data));
-//     console.log(cities);
-
-
-// /// /// regex /// ///
-// let wordToSearch= (/^[a-zA-Z]+$/g);
-
-
-//     function findMatches(wordToSearch, cities) {
-//         return cities.filter(data => {
-//             const regex = new RegExp(wordToSearch);
-//             return data.name.match(regex) ||
-//                 data.iata.match(regex);
-//         })
-//     }
+function functDir(){
+  if(document.getElementById('selectDir').value == "departure") {
+    document.getElementById("returnDepartureDateDiv").style.display = "none";
+  }
+  else{
+    document.getElementById("returnDepartureDateDiv").style.display = "flex";
+  }
+}
 
 
+// ------------ PASSENGERS INPUTS FUNCTIONS ------------ //
 
-//     function displayMatches(e) {
-//         const matchedArray = findMatches(e.target.value, cities);
-//         const html = matchedArray.map(data => {
-//             const regex = new RegExp(e.target.value, 'gi');
-//             const cityName = data.name.replace(regex,
-//                 `<span class=hl>${e.target.value}</span>`)
-//             const iataName = data.iata.replace(regex,
-//                 `<span class=hl>${e.target.value}</span>`)
-//             return `
-//                 <li>
-//                     <span class="name">${cityName}, ${iataName}</span>
-//                 </li>
-//             `
-//         })
-//     }
+let passengersNumber = document.getElementById('passengersPax')
+let passengers = document.getElementById('passengersPax').addEventListener('change', passengersPerAge)
+let labelAges = document.getElementById('passengersPax').addEventListener('change', LabelAges)
 
-//     const search = document.querySelector('.search');
+function deleteChilds () {
+  let div = document.getElementById('passengersAge');
+    while (div.firstChild) {
+          div.removeChild(div.firstChild);
+    }
+}
+
+function passengersPerAge() {
+  let passengersPax = passengersNumber.value
+    //renderPassengersDivs(passengersPax)
+    deleteChilds()
+    renderAgeOptions(passengersPax)
+}
+
+
+function renderAgeOptions(passengersPax){
+  // Función hija -- Closure
+  function generatePassengersOptions(value, content){
+    let newPassengerDiv = document.createElement('option')
+    if(value === "1"){
+      newPassengerDiv.setAttribute("value", "1") 
+      newPassengerDiv.text = "Bebé (de 0 a 23 meses)"
+      return newPassengerDiv
+    }
+    else{
+      newPassengerDiv.setAttribute("value", value) 
+      newPassengerDiv.text = content
+      return newPassengerDiv
+    }
+  }
+  let j = 0
+  let x = 0
+  for (x = 0; x < passengersPax ; x++){
+    let newDiv = document.createElement('div')
+    newDiv.innerHTML = `<select name="passengerAge" id="passengersAge${x}" required></select>`
+    document.getElementById('passengersAge').appendChild(newDiv)
+    drawPassengers(x)
+    document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions("","Ingrese la edad del pasajero"))
+    document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions("1","Bebé (de 0 a 23 meses)"))
+     
+        for(j = 2; j < 100; j++) {
+          document.getElementById(`passengersAge${x}`).appendChild(generatePassengersOptions(j.toString(),j.toString()))
+        } 
+  }
   
-//     search.addEventListener('change', displayMatches);
-//     search.addEventListener('keyup', displayMatches);
-/// API CITY&IATA ///
-// const apiKey= "SbdRljJcvNx01MGGFI4iXAcueAiLmuNQ";
-// const secret= "lcVhKMfcR50kWaQs";
+  //TO DO: faltaría: if bebé, no pintar 1, si no bebé de 0 a 23 meses. Recoger 1 como value
+  function drawPassengers(x){
+    let passenger = document.getElementById(`passengersAge${x}`)
+    passenger.addEventListener('change', () =>{
+    let newPassengerAge = document.createElement('p')
+    newPassengerAge.setAttribute("value", x)
+    newPassengerAge.setAttribute("id", x) 
+    // newPassengerAge.text = `Pasajero n°${x+1}: ${passenger.value}`
+    if(passenger.value == 1 || passenger.value.length > 2){
+      newPassengerAge.innerHTML = `Pasajero nº ${x+1}: Bebé (de 0 a 23 meses)`
+      document.getElementById('selectedPassengers').appendChild(newPassengerAge)
+      arrayPassengers.push(`${passenger.value}`)
+      console.log("estoy en el if", passenger.value)
+    }
+    else{
+      newPassengerAge.innerHTML = `Pasajero nº ${x+1}: ${passenger.value} años`
+      document.getElementById('selectedPassengers').appendChild(newPassengerAge)
+      arrayPassengers.push(`${passenger.value}`)
+      console.log("estoy en el else", passenger.value)
+    }
+    })
+    }
+    return j
+  }
 
-// function findAirport(){
-//     let selectAirport= document.getElementById('departureAirport').value
-    
-//     fetch(`https://test.api.amadeus.com/v1/reference-data/locations?subType=AIRPORT,CITY&keyword=${selectAirport}&page[limit]=5`, {
-//         method:"GET"
-//     })
-//     .then(response =>{
-//         return response.json();
-//     })
-//     .then (data =>{
-//         let selectAirportOk= document.createElement("h1");
-//         selectAirportOk.appendChild(document.createTextNode('aeropuerto'));
+ function setPassengers() {
+    location.href = '#modal';
+    var x = document.getElementById("0");
+    if (x!==null) {
+      let passengersPreviewDiv = document.getElementById("passengersPreview");
+      passengersPreviewDiv.style.display = "none";
+      document.getElementById("selectedPassengers").innerHTML="";
+      deleteChilds() 
+    } 
+}
+// ----------- VENTANA MODAL ----------- //
 
-       
-//     }).catch((error) => {
-//         console.error('Error:', error);
-//     });
-// }
+let btnPassengers = document.getElementById('btn-modal')
+btnPassengers.addEventListener('click', (e) =>{
+    e.preventDefault()
+    location.href = '#modal';
+})
+
+//  function setPassengers(e) {
+//     e.preventDefault()
+//     location.href = '#modal';
+//   }
+
+ function closeModal(){
+  location.href = '#';
+  let passengersPreviewDiv = document.getElementById("passengersPreview");
+  passengersPreviewDiv.style.display = "block";
+
+ };
+
+ function closeModalVisible(){
+    document.getElementById("close").innerHTML = "ACEPTAR";
+ };
+
+
+
+
+
+
+
+
+
+
+
+
+

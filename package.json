@@ -1,0 +1,27 @@
+{
+  "name": "vueling",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lulisway/vueling.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lulisway/vueling/issues"
+  },
+  "homepage": "https://github.com/lulisway/vueling#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "puppeteer": "^4.0.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
+  }
+}
